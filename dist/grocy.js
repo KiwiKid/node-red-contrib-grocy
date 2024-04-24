@@ -41,18 +41,14 @@ module.exports = function (RED) {
         this.nodeUrl = config.url;
         // @ts-ignore
         this.nodeApiKey = config.apiKey;
-        // Now you can use `nodeUrl` and `nodeApiKey` wherever needed in your node's functions.
     }
     RED.nodes.registerType("grocy-config", GrocyApiConfigNode);
-};
-module.exports = function (RED) {
     function GrocyTasksNode(config) {
         RED.nodes.createNode(this, config);
         const configNode = RED.nodes.getNode(config.apiConfig);
         this.on('input', (msg) => __awaiter(this, void 0, void 0, function* () {
-            // Using type assertion to ensure msg.payload is of type TaskPayload
             const payload = msg.payload;
-            if (!configNode || !configNode.url || !configNode.key) {
+            if (!configNode || !configNode.nodeUrl || !configNode.nodeApiKey) {
                 this.error("API configuration not set.");
                 this.status({ fill: "red", shape: "ring", text: "API configuration not set." });
                 return;
@@ -61,8 +57,8 @@ module.exports = function (RED) {
                 id: payload.taskId,
             };
             try {
-                const response = yield axios.post(configNode.url, taskData, {
-                    headers: { 'GROCY-API-KEY': configNode.key }
+                const response = yield axios.post(configNode.nodeUrl, taskData, {
+                    headers: { 'GROCY-API-KEY': configNode.nodeApiKey }
                 });
                 this.send({ payload: response.data });
                 this.status({ fill: "green", shape: "dot", text: "success" });

@@ -6,7 +6,8 @@
   "scripts": {
     "build": "rollup -c && mkdir -p ./dist/nodes && cp nodes/*.html dist/nodes/",
     "buildzip": "pnpm build && pnpm pack",
-    "buildinspect": "tar -tvf kiwikid-node-red-contrib-grocy-0.0.X.tgz"
+    "buildinspect": "tar -tvf kiwikid-node-red-contrib-grocy-0.0.X.tgz",
+    "release": "release-it"
   },
   "node-red": {
     "nodes": {
@@ -31,6 +32,7 @@
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.6",
+    "release-it": "^17.2.0",
     "rollup": "^4.16.4",
     "typescript": "^5.4.5"
   }
