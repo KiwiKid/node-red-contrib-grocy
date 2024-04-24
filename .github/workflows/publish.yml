@@ -1,12 +1,30 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - 'v*'
+  branches: 
+    - 'main'
 
 jobs:
+  check_commit_message:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            fetch-depth: 2 # Fetches only the last two commits to speed up the process
+        - name: Check commit message
+          id: check_message
+          run: |
+            commit_message=$(git log -1 --pretty=format:%s)
+            echo "Commit message: $commit_message"
+            if [[ $commit_message == release* ]]; then
+              echo "Proceeding with publishing steps."
+              echo "proceed_with_publishing=true" >> $GITHUB_ENV
+            else
+              echo "Commit does not start with 'release', skipping publishing steps."
+              echo "proceed_with_publishing=false" >> $GITHUB_ENV
   publish:
+    needs: check_commit_message
+    if: env.proceed_with_publishing == 'true'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
