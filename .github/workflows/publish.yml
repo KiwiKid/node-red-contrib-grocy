@@ -1,4 +1,4 @@
-name: Publish On 'release' commit
+name: Publish
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'main'
 
 jobs:
-  check_commit_message:
+  commit_starts_with_release:
     outputs:
       status: ${{ job.status }}
     runs-on: ubuntu-latest
@@ -24,8 +24,8 @@ jobs:
             exit 1
           fi
   publish:
-    needs: check_commit_message
-    if: needs.check_commit_message.outputs.status == 'success'
+    needs: commit_starts_with_release
+    if: needs.commit_starts_with_release.outputs.status == 'success'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
