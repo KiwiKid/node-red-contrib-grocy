@@ -15,5 +15,5 @@ module.exports = {
     json(),
     typescript() // TypeScript plugin to compile TS to JS
   ],
-  external: ['node-red']  // Treat 'node-red' as an external dependency
+  external: ['node-red', 'axios']  // Treat 'node-red' as an external dependency
 };

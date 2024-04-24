@@ -1,6 +1,6 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.0.7",
+  "version": "0.0.9",
   "description": "A Node-RED node to manage Grocy (supported: tasks)",
   "main": "dist/grocy.js",
   "scripts": {
