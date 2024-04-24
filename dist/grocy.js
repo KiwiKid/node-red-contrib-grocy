@@ -18144,6 +18144,17 @@ axios.HttpStatusCode = HttpStatusCode$1;
 axios.default = axios;
 
 module.exports = function (RED) {
+    function GrocyApiConfigNode(config) {
+        RED.nodes.createNode(this, config);
+        // @ts-ignore
+        this.nodeUrl = config.url;
+        // @ts-ignore
+        this.nodeApiKey = config.apiKey;
+        // Now you can use `nodeUrl` and `nodeApiKey` wherever needed in your node's functions.
+    }
+    RED.nodes.registerType("grocy-config", GrocyApiConfigNode);
+};
+module.exports = function (RED) {
     function GrocyTasksNode(config) {
         RED.nodes.createNode(this, config);
         const configNode = RED.nodes.getNode(config.apiConfig);
@@ -18152,6 +18163,7 @@ module.exports = function (RED) {
             const payload = msg.payload;
             if (!configNode || !configNode.url || !configNode.key) {
                 this.error("API configuration not set.");
+                this.status({ fill: "red", shape: "ring", text: "API configuration not set." });
                 return;
             }
             const taskData = {
@@ -18162,8 +18174,10 @@ module.exports = function (RED) {
                     headers: { 'GROCY-API-KEY': configNode.key }
                 });
                 this.send({ payload: response.data });
+                this.status({ fill: "green", shape: "dot", text: "success" });
             }
             catch (error) {
+                this.status({ fill: "red", shape: "ring", text: "error" });
                 this.error('Error creating task: ' + error.message, msg);
             }
         }));

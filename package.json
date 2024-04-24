@@ -1,11 +1,12 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "A Node-RED node to manage Grocy (supported: tasks)",
   "main": "dist/grocy.js",
   "scripts": {
-    "build": "rollup -c && cp nodes/*.html dist/",
-    "buildzip": "pnpm build && pnpm pack"
+    "build": "rollup -c && mkdir -p ./dist/nodes && cp nodes/*.html dist/nodes/",
+    "buildzip": "pnpm build && pnpm pack",
+    "buildinspect": "tar -tvf kiwikid-node-red-contrib-grocy-0.0.X.tgz"
   },
   "node-red": {
     "nodes": {
