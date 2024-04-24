@@ -5,40 +5,27 @@ interface GrocyApiConfigNodeDef extends NodeDef {
     url: string;
     apiKey: string;
 }
-
 module.exports = function(RED: NodeAPI) {
     function GrocyApiConfigNode(this: Node, config: GrocyApiConfigNodeDef) {
         RED.nodes.createNode(this, config);
-        
         // @ts-ignore
         this.nodeUrl = config.url;
         // @ts-ignore
         this.nodeApiKey = config.apiKey;
-
-        // Now you can use `nodeUrl` and `nodeApiKey` wherever needed in your node's functions.
     }
     RED.nodes.registerType("grocy-config", GrocyApiConfigNode);
-};
-
-
-interface TaskPayload {
-    taskId: string;
-}
-
-interface GrocyTasksConfig extends NodeDef {
-    apiConfig: string; // This should reference the ID of the config node
-}
-
-module.exports = function(RED: NodeAPI) {
-    function GrocyTasksNode(this: Node, config: GrocyTasksConfig) {
+    
+    interface TaskPayload {
+        taskId: string;
+    }
+    function GrocyTasksNode(this: Node, config: any) {
         RED.nodes.createNode(this, config);
-        const configNode: Node & { url?: string, key?: string } = RED.nodes.getNode(config.apiConfig) as Node & { url?: string, key?: string };
+        const configNode: Node & { nodeUrl?: string, nodeApiKey?: string } = RED.nodes.getNode(config.apiConfig) as Node & { nodeUrl?: string, nodeApiKey?: string };
 
         this.on('input', async (msg: NodeMessageInFlow) => {
-            // Using type assertion to ensure msg.payload is of type TaskPayload
             const payload = msg.payload as TaskPayload;
 
-            if (!configNode || !configNode.url || !configNode.key) {
+            if (!configNode || !configNode.nodeUrl || !configNode.nodeApiKey) {
                 this.error("API configuration not set.");
                 this.status({fill:"red", shape:"ring", text:"API configuration not set."});
                 return;
@@ -49,8 +36,8 @@ module.exports = function(RED: NodeAPI) {
             };
 
             try {
-                const response = await axios.post(configNode.url, taskData, {
-                    headers: { 'GROCY-API-KEY': configNode.key }
+                const response = await axios.post(configNode.nodeUrl, taskData, {
+                    headers: { 'GROCY-API-KEY': configNode.nodeApiKey }
                 });
                 
                 this.send({payload: response.data});
