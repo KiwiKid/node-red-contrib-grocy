@@ -7,12 +7,15 @@ on:
 
 jobs:
   check_commit_message:
+    outputs:
+      status: ${{ steps.early.conclusion }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 2
       - name: Check commit message
+        continue-on-error: true
         run: |
           commit_message=$(git log -1 --pretty=format:%s)
           echo "Commit message: $commit_message"
@@ -22,6 +25,7 @@ jobs:
           fi
   publish:
     needs: check_commit_message
+    if: needs.check_commit_message.outputs.status == 'success'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
