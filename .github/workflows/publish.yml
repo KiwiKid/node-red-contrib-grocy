@@ -1,8 +1,9 @@
 name: Publish
 
 on:
-  branches: 
-    - 'main'
+  push:
+    branches: 
+      - 'main'
 
 jobs:
   check_commit_message:
@@ -10,25 +11,24 @@ jobs:
       steps:
         - uses: actions/checkout@v2
           with:
-            fetch-depth: 2 # Fetches only the last two commits to speed up the process
+            fetch-depth: 2
         - name: Check commit message
           id: check_message
           run: |
             commit_message=$(git log -1 --pretty=format:%s)
             echo "Commit message: $commit_message"
+            echo "::set-output name=proceed_with_publishing::false"
             if [[ $commit_message == release* ]]; then
               echo "Proceeding with publishing steps."
-              echo "proceed_with_publishing=true" >> $GITHUB_ENV
-            else
+              echo "::set-output name=proceed_with_publishing::true"
+            else:
               echo "Commit does not start with 'release', skipping publishing steps."
-              echo "proceed_with_publishing=false" >> $GITHUB_ENV
   publish:
     needs: check_commit_message
-    if: env.proceed_with_publishing == 'true'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-        with:
+      with:
           fetch-depth: 0 # Fetches all history (and tags) for all branches and tags
           persist-credentials: false
     - uses: actions/setup-node@v2
@@ -36,7 +36,7 @@ jobs:
         node-version: '20'
         registry-url: 'https://registry.npmjs.org/'
     - name: Install pnpm
-        run: npm install -g pnpm
+      run: npm install -g pnpm
     - name: Cache pnpm store
       uses: actions/cache@v3
       with:
