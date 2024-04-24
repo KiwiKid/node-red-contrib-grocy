@@ -22,9 +22,9 @@ jobs:
             echo "proceed_with_publishing=false" >> $GITHUB_ENV
             if [[ $commit_message == release* ]]; then
               echo "Proceeding with publishing steps."
-              echo "proceed_with_publishing=true" >> $GITHUB_ENV
             else
               echo "Commit does not start with 'release', skipping publishing steps."
+              echo "::set-output name=proceed_with_publishing::$proceed_with_publishing"
   publish:
     needs: check_commit_message
     if: needs.check_commit_message.outputs.proceed_with_publishing == 'true'
