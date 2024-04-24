@@ -1,4 +1,4 @@
-name: Publish
+name: Publish On 'release' commit
 
 on:
   push:
