@@ -1,3 +1,19 @@
+(Not working yet - Early days on this project, aiming at setting and listing Tasks first)
+
+
+
+
+
+
+
+
+
+
+
+
+Misc:
+
+
 # Node-RED Node TypeScript Starter
 
 This is a quick-start template repository for creating new Node-RED node sets in TypeScript.
