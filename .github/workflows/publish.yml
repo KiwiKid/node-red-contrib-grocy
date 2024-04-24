@@ -8,6 +8,8 @@ on:
 jobs:
   check_commit_message:
       runs-on: ubuntu-latest
+      outputs:
+        proceed_with_publishing: ${{ steps.check_message.outputs.proceed_with_publishing }}
       steps:
         - uses: actions/checkout@v2
           with:
@@ -17,14 +19,15 @@ jobs:
           run: |
             commit_message=$(git log -1 --pretty=format:%s)
             echo "Commit message: $commit_message"
-            echo "::set-output name=proceed_with_publishing::false"
+            echo "proceed_with_publishing=false" >> $GITHUB_ENV
             if [[ $commit_message == release* ]]; then
               echo "Proceeding with publishing steps."
-              echo "::set-output name=proceed_with_publishing::true"
-            else:
+              echo "proceed_with_publishing=true" >> $GITHUB_ENV
+            else
               echo "Commit does not start with 'release', skipping publishing steps."
   publish:
     needs: check_commit_message
+    if: needs.check_commit_message.outputs.proceed_with_publishing == 'true'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
