@@ -1,9 +1,7 @@
-import { EditorRED } from "node-red";
-
-import { NodeInitializer } from "node-red";
+import { EditorRED, NodeInitializer } from "node-red";
 import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 
-const nodeInit: NodeInitializer = (RED:EditorRED): void => {
+const nodeInit: NodeInitializer = (RED): void => {
   function GetEntityNodeConstructor(
     this: GetEntityNode,
     config: GetEntityNodeDef

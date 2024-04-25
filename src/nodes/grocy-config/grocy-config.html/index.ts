@@ -6,9 +6,12 @@ declare const RED: EditorRED;
 RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
   category: "config",
   defaults: {
-    url: "127.0.0.1:9283",
-    apiKey: "",
-
+    url: {
+      value: "127.0.0.1:9283"
+    },
+    apiKey: {
+      value: "",
+    }
   },
   label: function () {
     return this.name || "grocy config";
