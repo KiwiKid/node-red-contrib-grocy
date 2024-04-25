@@ -14,45 +14,45 @@ jobs:
         with:
           node-version: '20'
       - run: npm install
-  #    - run: npm run lint
+      - run: npm run lint
       - run: npm run build
-  #    - run: npm run test
-  commit_starts_with_release:
-    needs: lint-and-build
-    outputs:
-      status: ${{ job.status }}
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 2
-      - name: Check commit message
-        continue-on-error: true
-        run: |
-          commit_message=$(git log -1 --pretty=format:%s)
-          echo "Commit message: $commit_message"
-          if [[ "$commit_message" != release* ]]; then
-            echo "Commit message does not start with 'release', stopping workflow."
-            exit 1
-          fi
-  publish:
-    needs: commit_starts_with_release
-    if: needs.commit_starts_with_release.outputs.status == 'success'
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-      with:
-          fetch-depth: 0 # Fetches all history (and tags) for all branches and tags
-          persist-credentials: false
-    - uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-        registry-url: 'https://registry.npmjs.org/'
-    - run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-    - run: npm i
-    # - run: npm run lint
-    - run: npm run build
+      - run: npm run test
+  #commit_starts_with_release:
+  # needs: lint-and-build
+  # outputs:
+  #   status: ${{ job.status }}
+  # runs-on: ubuntu-latest
+  # steps:
+  #   - uses: actions/checkout@v2
+  #     with:
+  #       fetch-depth: 2
+  #   - name: Check commit message
+  #     continue-on-error: true
+  #     run: |
+  #       commit_message=$(git log -1 --pretty=format:%s)
+  #       echo "Commit message: $commit_message"
+  #       if [[ "$commit_message" != release* ]]; then
+  #         echo "Commit message does not start with 'release', stopping workflow."
+  #         exit 1
+  #       fi
+ #publish:
+ #  needs: commit_starts_with_release
+ #  if needs.commit_starts_with_release.outputs.status == 'success'
+ #  runs-on: ubuntu-latest
+ #  steps:
+ #  - uses: actions/checkout@v2
+ #    with:
+ #        fetch-depth: 0 # Fetches all history (and tags) for all branches and tags
+ #        persist-credentials: false
+ #  - uses: actions/setup-node@v2
+ #    with:
+ #      node-version: '20'
+ #      registry-url: 'https://registry.npmjs.org/'
+ #  - run: echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+ #  - run: npm i
+ #  # - run: npm run lint
+ #  - run: npm run build
 
-    - run: npm publish --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+ #  - run: npm publish --access public
+ #    env:
+ #      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
