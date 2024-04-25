@@ -15,6 +15,11 @@ module.exports = {
     "plugins": [
         "@typescript-eslint"
     ],
+    "ignorePatterns": [
+        "rollup.config.editor.js",
+        "utils/**/*.js",
+        "dist/**/*.js"
+    ],
     "rules": {
     }
 };

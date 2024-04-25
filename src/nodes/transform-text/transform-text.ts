@@ -1,4 +1,4 @@
-import { NodeInitializer, EditorRED } from "node-red";
+import { NodeInitializer } from "node-red";
 import { TransformTextNode, TransformTextNodeDef } from "./modules/types";
 import { TransformTextOperation } from "./shared/types";
 

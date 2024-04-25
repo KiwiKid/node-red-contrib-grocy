@@ -1,4 +1,4 @@
-import { EditorRED, NodeInitializer } from "node-red";
+import { NodeInitializer } from "node-red";
 import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 
 const nodeInit: NodeInitializer = (RED): void => {
