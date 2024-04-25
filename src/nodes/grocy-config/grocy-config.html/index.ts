@@ -7,11 +7,11 @@ RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
   category: "config",
   defaults: {
     url: {
-      value: "127.0.0.1:9283"
+      value: "127.0.0.1:9283",
     },
     apiKey: {
       value: "",
-    }
+    },
   },
   label: function () {
     return this.name || "grocy config";

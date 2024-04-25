@@ -1,7 +1,6 @@
-
 export enum EntityOption {
-  Batteries = "batteries", 
-  batteryChargeCycles = "battery_charge_cycles", 
+  Batteries = "batteries",
+  batteryChargeCycles = "battery_charge_cycles",
   Chores = "chores",
   Choreslog = "chores_log",
   Equipment = "equipment",
@@ -14,11 +13,11 @@ export enum EntityOption {
   ProductsAveragePrice = "products_average_price",
   ProductsLastPurchased = "products_last_purchased",
   QuantityUnitConversions = "quantity_unit_conversions",
-  QuantityUnitConversionsResolved = "quantity_unit_conversions_resolved", 
+  QuantityUnitConversionsResolved = "quantity_unit_conversions_resolved",
   QuantityUnits = "quantity_units",
   Recipes = "recipes",
   RecipesNestings = "recipes_nestings",
-  RecipesPos = "recipes_pos", 
+  RecipesPos = "recipes_pos",
   RecipesPosResolved = "recipes_pos_resolved",
   ShoppingList = "shopping_list",
   ShoppingLists = "shopping_lists",
@@ -30,11 +29,10 @@ export enum EntityOption {
   Tasks = "tasks",
   UserEntities = "userentities",
   UserFields = "userfields",
-  UserObjects = "userobjects"
+  UserObjects = "userobjects",
 }
 
-
 export interface GetEntityOptions {
-  url:string
-  apiKey:string
+  url: string;
+  apiKey: string;
 }

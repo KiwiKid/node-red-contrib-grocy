@@ -1,4 +1,4 @@
 export interface GrocyConfigOptions {
-  url:string
-  apiKey:string
+  url: string;
+  apiKey: string;
 }

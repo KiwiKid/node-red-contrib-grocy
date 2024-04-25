@@ -63,11 +63,11 @@ const makeConfigItem = (nodeType) => ({
     file: `dist/nodes/${nodeType}/${nodeType}.html`,
     format: "iife",
     globals: {
-      axios: 'axios',
+      axios: "axios",
       globals: {
-        'node-red': 'RED'
-      }
-    }
+        "node-red": "RED",
+      },
+    },
   },
   plugins: makePlugins(nodeType),
   watch: {
