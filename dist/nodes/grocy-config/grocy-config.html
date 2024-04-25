@@ -1,0 +1,32 @@
+<script type="text/javascript">
+(function () {
+    'use strict';
+
+    RED.nodes.registerType("grocy-config", {
+        category: "config",
+        defaults: {
+            url: {
+                value: "127.0.0.1:9283",
+            },
+            apiKey: {
+                value: "",
+            },
+        },
+        label: function () {
+            return this.name || "grocy config";
+        },
+    });
+
+}());
+</script>
+<script type="text/html" data-template-name="grocy-config">
+  <div class="form-row">
+    <label for="node-url"><i class="icon-tag"></i> Url</label>
+    <input type="text" id="node-url" placeholder="http://127.0.0.1:9382">
+    <label for="node-api-key"><i class="icon-tag"></i> API Key</label>
+    <input type="text" id="node-api-key" placeholder="API_KEY">
+  </div>
+</script>
+<script type="text/html" data-help-name="grocy-config">
+  <p>Node description goes here.</p>
+</script>
