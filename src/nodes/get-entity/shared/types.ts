@@ -33,6 +33,7 @@ export enum EntityOption {
 }
 
 export interface GetEntityOptions {
-  url: string;
-  apiKey: string;
+  // url: string;
+  // apiKey: string;
+  entity_type: EntityOption
 }

@@ -1,64 +1,33 @@
-import { NodeInitializer } from "node-red";
-import axios from "axios";
-
+import { EditorRED } from "node-red";
 import { EntityOption } from "../shared/types";
-import { GrocyConfigNode } from "../../grocy-config/modules/types";
-import { GetEntityNode, GetEntityNodeDef } from "../modules/types";
+import { GetEntityEditorNodeProperties } from "./modules/types";
 
-type Payload = {
-  payload: {
-    type: string,
-  }
-}
+declare const RED: EditorRED;
 
-const nodeInit: NodeInitializer = (RED): void => {
-  function GetEntityNodeConstructor(
-    this: GetEntityNode,
-    config: GetEntityNodeDef
-  ): void {
-    RED.nodes.createNode(this, config);
-    this.configNode = (RED.nodes.getNode(
-      "grocy-config"
-    ) as unknown) as GrocyConfigNode;
+RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
+  category: "grocy",
+  color: "#a6bbcf",
+  defaults: {
+    entity_type: { value: EntityOption.Tasks },
+    name: { value: "" },
+  },
+  inputs: 1,
+  outputs: 1,
+  icon: "transform-text.png",
+  paletteLabel: "transform text",
+  label: function () {
+    if (this.name) {
+      return this.name;
+    }
+   // switch (this.operation) {
+   //   case EntityOption.Tasks: {
+        return this.entity_type?.toString();
+   //   }
+    //  case TransformTextOperation.LowerCase: {
+  //      return "to lower case";
+   //   }
+  //  }
+  },
+});
 
-    this.on("input", async (msg: unknown , send, done) => {
-      const validMsg = msg as unknown as Payload
 
-      console.log(validMsg?.payload);
-      if (!validMsg.payload || !validMsg.payload.type) {
-        this.error("Invalid entity type provided.");
-        done();
-        return;
-      }
-
-      const entityType = validMsg.payload.type as keyof typeof EntityOption;
-
-      if (
-        !Object.values(EntityOption).includes(
-          EntityOption[entityType as keyof typeof EntityOption]
-        )
-      ) {
-        this.error("Invalid entity type provided.");
-        done();
-        return;
-      }
-      const apiUrl = `${this.configNode.url}/objects/${entityType}`;
-
-      try {
-        const response = await axios.get(apiUrl, {
-          headers: { "X-API-KEY": this.configNode.apiKey },
-        });
-        validMsg.payload = response.data;
-        send(validMsg);
-        done();
-      } catch (error) {
-        this.error("Failed to fetch entity data: " + JSON.stringify(error));
-        done();
-      }
-    });
-  }
-
-  RED.nodes.registerType("get-entity", GetEntityNodeConstructor);
-};
-
-export default nodeInit;
