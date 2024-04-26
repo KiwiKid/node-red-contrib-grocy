@@ -7,7 +7,7 @@ const nodeInit = (RED) => {
             done();
         });
     }
-    RED.nodes.registerType("get-entity", GetEntityNodeConstructor);
+    RED.nodes.registerType("get-entity-old", GetEntityNodeConstructor);
 };
 module.exports = nodeInit;
 //# sourceMappingURL=get-entity.js.map
