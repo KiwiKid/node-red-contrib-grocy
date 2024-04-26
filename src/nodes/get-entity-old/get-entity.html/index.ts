@@ -3,7 +3,7 @@ import { GetEntityEditorNodeProperties } from "./modules/types";
 
 declare const RED: EditorRED;
 
-RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
+RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity-old", {
   category: "grocy",
   color: "#a6bbcf",
   defaults: {

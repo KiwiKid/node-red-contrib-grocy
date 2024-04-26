@@ -14,7 +14,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     });
   }
 
-  RED.nodes.registerType("get-entity", GetEntityNodeConstructor);
+  RED.nodes.registerType("get-entity-old", GetEntityNodeConstructor);
 };
 
 export = nodeInit;
