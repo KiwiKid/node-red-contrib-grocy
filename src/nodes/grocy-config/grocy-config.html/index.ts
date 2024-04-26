@@ -14,6 +14,6 @@ RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
     },
   },
   label: function () {
-    return this.name || "grocy config";
+    return this.name || "grocy config 1";
   },
 });
