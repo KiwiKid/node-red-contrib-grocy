@@ -3,7 +3,7 @@
     'use strict';
 
     RED.nodes.registerType("grocy-config", {
-        category: "config",
+        category: "grocy",
         defaults: {
             url: {
                 value: "127.0.0.1:9283",
@@ -13,7 +13,7 @@
             },
         },
         label: function () {
-            return this.name || "grocy config";
+            return this.name || "grocy config 1";
         },
     });
 
