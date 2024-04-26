@@ -1,6 +1,6 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "Description of the node set here",
   "scripts": {
     "add-node": "node ./utils/add-node.js",
