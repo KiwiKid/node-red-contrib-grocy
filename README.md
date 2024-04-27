@@ -1,6 +1,18 @@
 (Not working yet - Early days on this project, aiming at setting and listing Tasks first)
 
-To publish
+[![npm version](https://badge.fury.io/js/@kiwikid%2Fnode-red-contrib-grocy.svg)](https://badge.fury.io/js/@kiwikid%2Fnode-red-contrib-grocy)
+
+
+## Install [WARNING: WIP/DOES NOT WORK YET]
+```
+# navigate to node red instance and run:
+yarn add @kiwikid/node-red-contrib-grocy
+```
+
+
+
+
+# Publish
 ```bash
 # (before)
 yarn build
