@@ -51,7 +51,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           done();
         }
       } else {
-        this.error("this.server is undefined");
+        this.error("no cNode");
         done();
       }
     });
