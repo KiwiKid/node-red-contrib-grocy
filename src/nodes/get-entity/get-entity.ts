@@ -1,7 +1,7 @@
 import { NodeInitializer } from "node-red";
 import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 import axios from 'axios'
-import { GrocyConfigNode } from "../grocy-config/modules/types";
+import { GrocyConfig } from "../shared/types";
 
 interface Payload {
   entity_type: string
@@ -17,7 +17,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     RED.nodes.createNode(this, config);
     this.on("input", (rawMsg, send, done) => {
       const payload = rawMsg.payload as unknown as Payload;
-      this.server = RED.nodes.getNode('grocy-config') as unknown as GrocyConfigNode;
+      this.server = RED.nodes.getNode('grocy-config') as unknown as GrocyConfig;
 
       if(this.server) {
 

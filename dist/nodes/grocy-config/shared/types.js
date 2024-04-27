@@ -1,3 +1,8 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
+/*export interface GrocyConfigOptions {
+  url: string;
+  apiKey: string;
+}
+
+*/ 
 //# sourceMappingURL=types.js.map
