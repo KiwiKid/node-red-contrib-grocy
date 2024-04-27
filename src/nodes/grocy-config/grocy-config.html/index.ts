@@ -19,13 +19,13 @@ RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
     return this.name || this.url;
   },
   oneditprepare: function () {
-    $('#node-input-url').val(this.url);
-    $('#node-input-api-key').val(this.apiKey);
+    $('#node-config-input-url').val(this.url);
+    $('#node-config-input-api-key').val(this.apiKey);
   },
   oneditsave: function () {
-    const url = $('#node-input-url').val()?.toString() ?? ''
+    const url = $('#node-config-input-url').val()?.toString() ?? ''
     this.url = url;
-    const key = $('#node-input-api-key').val()?.toString() ?? ''
+    const key = $('#node-config-input-api-key').val()?.toString() ?? ''
     this.apiKey = key
   }
 });
