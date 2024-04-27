@@ -7,25 +7,40 @@
         defaults: {
             url: {
                 value: "127.0.0.1:9283",
+                required: true
             },
             apiKey: {
                 value: "",
+                required: true
             },
         },
         label: function () {
-            return this.name || "grocy config 1";
+            return this.name || this.url;
         },
+        oneditprepare: function () {
+            $('#node-input-url').val(this.url);
+            $('#node-input-api-key').val(this.apiKey);
+        },
+        oneditsave: function () {
+            var _a, _b, _c, _d;
+            var url = (_b = (_a = $('#node-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+            this.url = url;
+            var key = (_d = (_c = $('#node-input-api-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            this.apiKey = key;
+        }
     });
 
 }());
 </script>
 <script type="text/html" data-template-name="grocy-config">
-  <div class="form-row">
-    <label for="node-url"><i class="icon-tag"></i> Url</label>
-    <input type="text" id="node-url" placeholder="http://127.0.0.1:9382">
-    <label for="node-api-key"><i class="icon-tag"></i> API Key</label>
-    <input type="text" id="node-api-key" placeholder="API_KEY">
-  </div>
+    <div class="form-row">
+      <label for="node-input-url"><i class="icon-tag"></i> Url</label>
+      <input type="text" id="node-input-url" placeholder="http://127.0.0.1:9283">
+    </div>
+    <div class="form-row">
+      <label for="node-input-api-key"><i class="icon-tag"></i> API Key</label>
+      <input type="text" id="node-input-api-key" placeholder="API_KEY">
+    </div>
 </script>
 <script type="text/html" data-help-name="grocy-config">
   <p>Node description goes here.</p>
