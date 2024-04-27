@@ -5,5 +5,5 @@ import { GrocyConfig } from "../../../shared/types";
 export interface GetEntityEditorNodeProperties
   extends EditorNodeProperties,
     GetEntityOptions {
-      server: GrocyConfig
+      config: GrocyConfig
     }

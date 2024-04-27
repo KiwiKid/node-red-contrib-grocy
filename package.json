@@ -1,7 +1,7 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.2.21",
-  "description": "Wip grocy node set",
+  "version": "0.2.23",
+  "description": "Wip (pre-release) grocy node set",
   "scripts": {
     "add-node": "node ./utils/add-node.js",
     "copy": "copyfiles -u 2 \"./src/nodes/**/*.{png,svg}\" \"./dist/nodes/\"",
