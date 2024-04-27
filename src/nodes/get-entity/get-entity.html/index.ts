@@ -7,6 +7,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   category: "grocy",
   color: "#a6bbcf",
   defaults: {
+    server: {value: "", type: 'grocy-config'},
     name: { value: "" },
   },
   inputs: 1,
