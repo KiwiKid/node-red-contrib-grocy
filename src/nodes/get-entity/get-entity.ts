@@ -1,7 +1,7 @@
 import { NodeInitializer } from "node-red";
 import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 import axios from 'axios'
-import { GrocyConfig } from "../shared/types";
+import { GrocyConfigNodeDef } from "../grocy-config/modules/types";
 
 interface Payload {
   entity_type: string
@@ -12,16 +12,16 @@ const requiredKeys = ['entity_type']
 const nodeInit: NodeInitializer = (RED): void => {
   function GetEntityNodeConstructor(
     this: GetEntityNode,
-    config: GetEntityNodeDef
+    nodeConfig: GetEntityNodeDef
   ): void {
-    RED.nodes.createNode(this, config);
+    RED.nodes.createNode(this, nodeConfig);
     this.on("input", (rawMsg, send, done) => {
       const payload = rawMsg.payload as unknown as Payload;
-      this.server = RED.nodes.getNode('grocy-config') as unknown as GrocyConfig;
 
-      if(this.server) {
 
-    
+      const cNode = RED.nodes.getNode('grocy-config') as unknown as GrocyConfigNodeDef
+
+      if(cNode) {
 
         const missingKeys = requiredKeys.filter((rk) => !Object.keys(payload).some((p) => p == rk))
         if(missingKeys.length > 0){
@@ -29,11 +29,11 @@ const nodeInit: NodeInitializer = (RED): void => {
         }
 
         if (payload?.entity_type) {
-          const url = `${this.server.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
+          const url = `${cNode.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
       
           axios.get(url, {
             headers: {
-              'GROCY-API-KEY': this.server.apiKey,
+              'GROCY-API-KEY': cNode.apiKey,
               'Accept': 'application/json'
             }
           })

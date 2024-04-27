@@ -3,4 +3,3 @@ import { GrocyConfig } from "../../shared/types";
 
 
 export interface GrocyConfigNodeDef extends NodeDef, GrocyConfig {}
-export type GrocyConfigNode = Node 

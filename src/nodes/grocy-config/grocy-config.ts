@@ -1,5 +1,6 @@
 import { NodeInitializer } from "node-red";
-import { GrocyConfigNode, GrocyConfigNodeDef } from "./modules/types";
+import { GrocyConfigNodeDef } from "./modules/types";
+import { GrocyConfigNode } from "../shared/types";
 
 const nodeInit: NodeInitializer = (RED): void => {
   function GrocyConfigNodeConstructor(
