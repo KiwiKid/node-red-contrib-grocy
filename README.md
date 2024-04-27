@@ -1,6 +1,24 @@
 (Not working yet - Early days on this project, aiming at setting and listing Tasks first)
 
-Misc:
+To publish
+```bash
+# (before)
+yarn build
+git add .
+git commit -m "XXX"
+
+npm publish
+```
+
+
+
+
+
+
+
+
+
+Misc docs:
 
 # Node-RED Node TypeScript Starter
 

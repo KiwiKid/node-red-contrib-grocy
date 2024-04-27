@@ -6,7 +6,7 @@
         category: "grocy",
         color: "#a6bbcf",
         defaults: {
-            server: { value: "", type: 'grocy-config' },
+            config: { value: "", type: 'grocy-config' },
             name: { value: "" },
         },
         inputs: 1,
@@ -25,8 +25,11 @@
     <label for="node-input-name"><i class="icon-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
+  <div class="form-row">
+    <label for="node-input-config"><i class="fa fa-database"></i> <span data-i18n="gorcy.input.config"></label>
+    <input type="text" id="node-input-config">
+</div>
 </script>
-
 <script type="text/html" data-help-name="get-entity">
   <p>Node description goes here.</p>
 </script>
