@@ -10,7 +10,7 @@ RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
       value: "127.0.0.1:9283",
       required: true
     },
-    apiKey: {
+    key: {
       value: "",
       required: true
     },
@@ -20,12 +20,12 @@ RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
   },
   oneditprepare: function () {
     $('#node-config-input-url').val(this.url);
-    $('#node-config-input-api-key').val(this.apiKey);
+    $('#node-config-input-key').val(this.key);
   },
   oneditsave: function () {
     const url = $('#node-config-input-url').val()?.toString() ?? ''
     this.url = url;
-    const key = $('#node-config-input-api-key').val()?.toString() ?? ''
-    this.apiKey = key
+    const key = $('#node-config-input-key').val()?.toString() ?? ''
+    this.key = key
   }
 });

@@ -12,10 +12,10 @@ export type GrocyConfigNode = Node;
 
 export interface GrocyConfig {
     url: string;
-    apiKey: string;
+    key: string;
 }
 
 export interface GrocyConfigNode extends Node { 
     url: string;
-    apiKey: string;
+    key: string;
 }

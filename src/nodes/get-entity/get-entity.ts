@@ -33,7 +33,7 @@ const nodeInit: NodeInitializer = (RED): void => {
       
           axios.get(url, {
             headers: {
-              'GROCY-API-KEY': cNode.apiKey,
+              'GROCY-API-KEY': cNode.key,
               'Accept': 'application/json'
             }
           })

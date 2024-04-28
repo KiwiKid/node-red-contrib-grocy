@@ -15,6 +15,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   icon: "file.png",
   paletteLabel: "get entity",
   label: function () {
-    return this.name || "get entity";
+    return `Grocy: ${this.name}` || "get entity";
   },
+  
 });

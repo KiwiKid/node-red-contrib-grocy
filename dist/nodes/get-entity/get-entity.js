@@ -19,7 +19,7 @@ const nodeInit = (RED) => {
                     const url = `${cNode.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
                     axios_1.default.get(url, {
                         headers: {
-                            'GROCY-API-KEY': cNode.apiKey,
+                            'GROCY-API-KEY': cNode.key,
                             'Accept': 'application/json'
                         }
                     })
