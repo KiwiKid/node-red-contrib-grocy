@@ -1,15 +1,12 @@
 import { Node, NodeDef } from "node-red";
 import { GetEntityOptions } from "../shared/types";
-import { GrocyConfig } from "src/nodes/shared/types";
-//import { GrocyConfig } from "src/nodes/shared/types";
 
 export interface GetEntityNodeDef extends NodeDef, GetEntityOptions {
-    config: GrocyConfig
+    credentials: {
+        username: string;
+        password: string;
+    };
 }
-    /*
-}
-*/
-/*export interface GetEntityNode extends Node {
-    config: GrocyConfig
- }*/
+
+// export interface GetEntityNode extends Node {}
 export type GetEntityNode = Node;

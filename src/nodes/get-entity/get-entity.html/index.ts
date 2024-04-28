@@ -3,19 +3,27 @@ import { GetEntityEditorNodeProperties } from "./modules/types";
 
 declare const RED: EditorRED;
 
-RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
-  category: "grocy",
+interface GetEntityCredentials {
+  username: { type: string };
+  password: { type: string };
+}
+
+
+RED.nodes.registerType<GetEntityEditorNodeProperties, GetEntityCredentials>("get-entity", {
+  category: "function",
   color: "#a6bbcf",
   defaults: {
-    config: {value: "", type: 'grocy-config'},
     name: { value: "" },
+  },
+  credentials: {
+    username: {type:"text"},
+    password: {type:"password"}
   },
   inputs: 1,
   outputs: 1,
   icon: "file.png",
   paletteLabel: "get entity",
   label: function () {
-    return `Grocy: ${this.name}` || "get entity";
+    return this.name || "get entity";
   },
-  
 });
