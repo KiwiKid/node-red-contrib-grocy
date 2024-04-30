@@ -38,12 +38,7 @@ const nodeInit = (RED) => {
                 done(); // Call 'done' if there are async tasks.
         });
     }
-    RED.nodes.registerType("get-entity", GetEntityNodeConstructor, {
-        credentials: {
-            username: { type: "text" },
-            password: { type: "password" }
-        }
-    });
+    RED.nodes.registerType("get-entity", GetEntityNodeConstructor);
 };
 module.exports = nodeInit;
 //# sourceMappingURL=get-entity.js.map

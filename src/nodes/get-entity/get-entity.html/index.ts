@@ -13,6 +13,9 @@ RED.nodes.registerType<GetEntityEditorNodeProperties, GetEntityCredentials>("get
   category: "function",
   color: "#a6bbcf",
   defaults: {
+    credentials: {
+      value: ""
+    },
     name: { value: "" },
   },
   credentials: {

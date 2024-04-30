@@ -1,3 +1,6 @@
 export interface GetEntityOptions {
-  // node options
+    credentials: {
+        username: string;
+        password: string;
+    };
 }
