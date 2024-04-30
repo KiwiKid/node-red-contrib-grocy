@@ -60,7 +60,12 @@ const nodeInit: NodeInitializer = (RED): void => {
     });
   }
 
-  RED.nodes.registerType("get-entity", GetEntityNodeConstructor);
+  RED.nodes.registerType("get-entity", GetEntityNodeConstructor, {
+    credentials: {
+        username: {type:"text"},
+        password: {type:"password"}
+    }
+  });
 };
 
 export = nodeInit;
