@@ -28,5 +28,6 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
     RED.settings.set('GROCY_URL', url)
     const key = $('#node-input-key').val()?.toString() ?? ''
     RED.settings.set('GROCY_KEY', key)
+    RED.notify(`set grocy url:${(url?.length)} key:${key?.length}`)
   }
 });

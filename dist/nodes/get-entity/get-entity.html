@@ -27,6 +27,7 @@
             RED.settings.set('GROCY_URL', url);
             var key = (_d = (_c = $('#node-input-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
             RED.settings.set('GROCY_KEY', key);
+            RED.notify("set grocy url:" + (url === null || url === void 0 ? void 0 : url.length) + " key:" + (key === null || key === void 0 ? void 0 : key.length));
         }
     });
 
