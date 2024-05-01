@@ -1,19 +1,7 @@
 import { NodeInitializer, NodeMessageInFlow } from "node-red";
 import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 import axios from 'axios'
-
-interface NodePayload {
-      entity_type?: string; // Optional because it might not be provided
-    // Add other properties as needed
-}
-
-interface NodeInput extends NodeMessageInFlow {
-  payload:NodePayload
-}
-
-interface NodeOutput extends NodeMessageInFlow {
-  payload: any; // You can specify more specific type based on what your API returns
-}
+import { GetEntityOptions } from "./shared/types";
 
 const nodeInit: NodeInitializer = (RED): void => {
   function GetEntityNodeConstructor(
@@ -22,18 +10,22 @@ const nodeInit: NodeInitializer = (RED): void => {
   ): void {
     RED.nodes.createNode(this, config);
 
-    const credentials = this.credentials as { username: string; password: string };
+    const credentials = {
+      url:  RED.settings.get('GROCY_URL'),
+      key:  RED.settings.get('GROCY_KEY')
+    }
 
+    console.log(credentials)
     this.on('input', (msg, send, done) => {
 
-      const payload = msg.payload as NodePayload
+      const payload = msg.payload as GetEntityOptions
 
       if (typeof payload?.entity_type == 'string') {
-        const url = `${credentials.username}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
+        const url = `${credentials.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
     
         axios.get(url, {
           headers: {
-            'GROCY-API-KEY': credentials.password,
+            'GROCY-API-KEY': credentials.key,
             'Accept': 'application/json'
           }
         })

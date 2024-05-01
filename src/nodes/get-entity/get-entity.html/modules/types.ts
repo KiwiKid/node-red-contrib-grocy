@@ -4,4 +4,5 @@ import { GetEntityOptions } from "../../shared/types";
 export interface GetEntityEditorNodeProperties
   extends EditorNodeProperties,
     GetEntityOptions {
+      thing: string
     }

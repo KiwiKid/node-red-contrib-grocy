@@ -1,6 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface GetEntityOptions {
-    credentials: {
-        username: string;
-        password: string;
-    };
-}
+    entity_type: string
+ }

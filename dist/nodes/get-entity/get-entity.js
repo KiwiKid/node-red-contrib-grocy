@@ -6,14 +6,18 @@ const axios_1 = __importDefault(require("axios"));
 const nodeInit = (RED) => {
     function GetEntityNodeConstructor(config) {
         RED.nodes.createNode(this, config);
-        const credentials = this.credentials;
+        const credentials = {
+            url: RED.settings.get('GROCY_URL'),
+            key: RED.settings.get('GROCY_KEY')
+        };
+        console.log(credentials);
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
             if (typeof (payload === null || payload === void 0 ? void 0 : payload.entity_type) == 'string') {
-                const url = `${credentials.username}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
+                const url = `${credentials.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
                 axios_1.default.get(url, {
                     headers: {
-                        'GROCY-API-KEY': credentials.password,
+                        'GROCY-API-KEY': credentials.key,
                         'Accept': 'application/json'
                     }
                 })

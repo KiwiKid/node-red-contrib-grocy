@@ -3,24 +3,14 @@ import { GetEntityEditorNodeProperties } from "./modules/types";
 
 declare const RED: EditorRED;
 
-interface GetEntityCredentials {
-  username: { type: string };
-  password: { type: string };
-}
 
-
-RED.nodes.registerType<GetEntityEditorNodeProperties, GetEntityCredentials>("get-entity", {
+RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   category: "function",
   color: "#a6bbcf",
   defaults: {
-    credentials: {
-      value: ""
-    },
     name: { value: "" },
-  },
-  credentials: {
-    username: {type:"text"},
-    password: {type:"password"}
+    thing: { value: "" },
+    entity_type: { value: "tasks"}
   },
   inputs: 1,
   outputs: 1,
@@ -29,4 +19,14 @@ RED.nodes.registerType<GetEntityEditorNodeProperties, GetEntityCredentials>("get
   label: function () {
     return this.name || "get entity";
   },
+  /*oneditprepare: function () {
+    $('#node-config-input-url').val(os.);
+    $('#node-config-input-key').val(this.key);
+  },*/
+  oneditsave: function () {
+    const url = $('#node-input-url').val()?.toString() ?? ''
+    RED.settings.set('GROCY_URL', url)
+    const key = $('#node-input-key').val()?.toString() ?? ''
+    RED.settings.set('GROCY_KEY', key)
+  }
 });

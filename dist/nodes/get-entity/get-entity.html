@@ -6,14 +6,9 @@
         category: "function",
         color: "#a6bbcf",
         defaults: {
-            credentials: {
-                value: ""
-            },
             name: { value: "" },
-        },
-        credentials: {
-            username: { type: "text" },
-            password: { type: "password" }
+            thing: { value: "" },
+            entity_type: { value: "tasks" }
         },
         inputs: 1,
         outputs: 1,
@@ -22,6 +17,17 @@
         label: function () {
             return this.name || "get entity";
         },
+        /*oneditprepare: function () {
+          $('#node-config-input-url').val(os.);
+          $('#node-config-input-key').val(this.key);
+        },*/
+        oneditsave: function () {
+            var _a, _b, _c, _d;
+            var url = (_b = (_a = $('#node-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+            RED.settings.set('GROCY_URL', url);
+            var key = (_d = (_c = $('#node-input-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            RED.settings.set('GROCY_KEY', key);
+        }
     });
 
 }());
@@ -32,12 +38,11 @@
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
   <div class="form-row">
-      <label for="node-input-username"><i class="fa fa-tag"></i> Username</label>
-      <input type="text" id="node-input-username">
+      <label for="node-input-url"><i class="fa fa-tag"></i> Username</label>      <input type="text" id="node-config-input-url">
   </div>
   <div class="form-row">
-      <label for="node-input-password"><i class="fa fa-tag"></i> Password</label>
-      <input type="password" id="node-input-password">
+      <label for="node-input-key"><i class="fa fa-tag"></i> Password</label>
+      <input type="password" id="node-config-input-key">
   </div>
 </script>
 <script type="text/html" data-help-name="get-entity">
