@@ -24,10 +24,15 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
     $('#node-config-input-key').val(this.key);
   },*/
   oneditsave: function () {
-    const url = $('#node-input-url').val()?.toString() ?? ''
-    RED.settings.set('GROCY_URL', url)
-    const key = $('#node-input-key').val()?.toString() ?? ''
-    RED.settings.set('GROCY_KEY', key)
-    RED.notify(`set grocy url:${(url?.length)} key:${key?.length}`)
-  }
+    // Access the flow context
+    const url = $('#node-input-url').val()?.toString() ?? '';
+    const key = $('#node-input-key').val()?.toString() ?? '';
+
+    // Set values globally using RED.settings
+    RED.settings.set('GROCY_URL', url);
+    RED.settings.set('GROCY_KEY', key);
+
+    // Notify user about the settings
+    RED.notify(`Set Grocy URL: ${url.length}, Key: ${key.length}`);
+ }
 });

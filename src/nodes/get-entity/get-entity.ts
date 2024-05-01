@@ -9,13 +9,12 @@ const nodeInit: NodeInitializer = (RED): void => {
     config: GetEntityNodeDef
   ): void {
     RED.nodes.createNode(this, config);
-
     const credentials = {
       url:  RED.settings.get('GROCY_URL'),
       key:  RED.settings.get('GROCY_KEY')
     }
 
-    console.log(credentials)
+    console.warn('SET URL :'+ credentials.url)
     this.on('input', (msg, send, done) => {
 
       const payload = msg.payload as GetEntityOptions

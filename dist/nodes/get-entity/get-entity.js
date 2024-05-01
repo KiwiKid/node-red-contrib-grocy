@@ -10,7 +10,7 @@ const nodeInit = (RED) => {
             url: RED.settings.get('GROCY_URL'),
             key: RED.settings.get('GROCY_KEY')
         };
-        console.log(credentials);
+        console.warn('SET URL :' + credentials.url);
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
             if (typeof (payload === null || payload === void 0 ? void 0 : payload.entity_type) == 'string') {
