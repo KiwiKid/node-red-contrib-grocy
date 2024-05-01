@@ -1,40 +1,40 @@
 <script type="text/javascript">
-(function () {
+  (function () {
     'use strict';
 
     RED.nodes.registerType("get-entity", {
-        category: "function",
-        color: "#a6bbcf",
-        defaults: {
-            name: { value: "" },
-            thing: { value: "" },
-            entity_type: { value: "tasks" }
-        },
-        inputs: 1,
-        outputs: 1,
-        icon: "file.png",
-        paletteLabel: "get entity",
-        label: function () {
-            return this.name || "get entity";
-        },
-        /*oneditprepare: function () {
-          $('#node-config-input-url').val(os.);
-          $('#node-config-input-key').val(this.key);
-        },*/
-        oneditsave: function () {
-            var _a, _b, _c, _d;
-            // Access the flow context
-            var url = (_b = (_a = $('#node-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
-            var key = (_d = (_c = $('#node-input-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
-            // Set values globally using RED.settings
-            RED.settings.set('GROCY_URL', url);
-            RED.settings.set('GROCY_KEY', key);
-            // Notify user about the settings
-            RED.notify("Set Grocy URL: " + url.length + ", Key: " + key.length);
-        }
+      category: "function",
+      color: "#a6bbcf",
+      defaults: {
+        name: { value: "" },
+        thing: { value: "" },
+        entity_type: { value: "tasks" }
+      },
+      inputs: 1,
+      outputs: 1,
+      icon: "file.png",
+      paletteLabel: "get entity",
+      label: function () {
+        return this.name || "get entity";
+      },
+      /*oneditprepare: function () {
+        $('#node-config-input-url').val(os.);
+        $('#node-config-input-key').val(this.key);
+      },*/
+      oneditsave: function () {
+        var _a, _b, _c, _d;
+        // Access the flow context
+        var url = (_b = (_a = $('#node-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+        var key = (_d = (_c = $('#node-input-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+        // Set values globally using RED.settings
+        RED.settings.set('GROCY_URL', url);
+        RED.settings.set('GROCY_KEY', key);
+        // Notify user about the settings
+        RED.notify("Set Grocy URL: " + url.length + ", Key: " + key.length);
+      }
     });
 
-}());
+  }());
 </script>
 <script type="text/html" data-template-name="get-entity">
   <div class="form-row">
@@ -42,11 +42,11 @@
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
   <div class="form-row">
-      <label for="node-input-url"><i class="fa fa-tag"></i> Username</label>      <input type="text" id="node-config-input-url">
+      <label for="node-input-url"><i class="fa fa-tag"></i> URL</label>      <input type="text" id="node-input-url">
   </div>
   <div class="form-row">
-      <label for="node-input-key"><i class="fa fa-tag"></i> Password</label>
-      <input type="password" id="node-config-input-key">
+      <label for="node-input-key"><i class="fa fa-tag"></i> API Key</label>
+      <input type="password" id="node-input-key">
   </div>
 </script>
 <script type="text/html" data-help-name="get-entity">
