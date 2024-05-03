@@ -42,7 +42,7 @@ const nodeInit = (RED) => {
                             done();
                         })
                             .catch(error => {
-                            this.error("Failed to retrieve data: " + error.message);
+                            this.error(`Failed to PUT "${payload.entity_type}" (${url}): ` + error.message);
                             done();
                         });
                         done();
@@ -61,7 +61,7 @@ const nodeInit = (RED) => {
                             done();
                         })
                             .catch(error => {
-                            this.error("Failed to retrieve data: " + error.message);
+                            this.error(`Failed to GET "${payload.entity_type}" (${url}): ${error.message}` + error.message);
                             done();
                         });
                         break;
