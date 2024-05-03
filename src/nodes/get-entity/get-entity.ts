@@ -36,7 +36,7 @@ const nodeInit: NodeInitializer = (RED): void => {
 
 
       if (typeof payload?.entity_type == 'string') {
-        const url = `${credentialsToUse.url}/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
+        const url = `${credentialsToUse.url}/api/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
         
         switch(payload.method){
           case 'PUT': 
