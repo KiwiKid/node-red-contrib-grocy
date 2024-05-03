@@ -19,14 +19,15 @@
         },
         oneditprepare: function () {
             $('#node-config-input-url').val(this.url);
-            $('#node-config-input-key').val(this.key);
+            $('#node-config-input-api-key').val(this.key);
         },
         oneditsave: function () {
             var _a, _b, _c, _d;
             var url = (_b = (_a = $('#node-config-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
             this.url = url;
-            var key = (_d = (_c = $('#node-config-input-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            var key = (_d = (_c = $('#node-config-input-api-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
             this.key = key;
+            RED.notify("oneditsave " + url + " " + key);
         }
     });
 

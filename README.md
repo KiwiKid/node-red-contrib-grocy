@@ -14,11 +14,7 @@ yarn add @kiwikid/node-red-contrib-grocy
 
 # Publish
 ```bash
-# (before)
-yarn build
-git add .
-git commit -m "XXX"
-
+yarn pre:publish
 npm publish
 ```
 

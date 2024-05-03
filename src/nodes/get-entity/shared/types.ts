@@ -6,4 +6,7 @@ export interface GetEntityOptions {
     key?: string
  }
 
- export type GetEntityMethod = 'GET' | 'PUT'
+ export enum GetEntityMethod {
+    GET = "GET",
+    PUT = "PUT",
+  }

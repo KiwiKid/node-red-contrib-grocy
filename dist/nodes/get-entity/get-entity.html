@@ -2,13 +2,19 @@
 (function () {
     'use strict';
 
+    var GetEntityMethod;
+    (function (GetEntityMethod) {
+        GetEntityMethod["GET"] = "GET";
+        GetEntityMethod["PUT"] = "PUT";
+    })(GetEntityMethod || (GetEntityMethod = {}));
+
     RED.nodes.registerType("get-entity", {
         category: "function",
         color: "#a6bbcf",
         defaults: {
             name: { value: "" },
             entity_type: { value: "tasks" },
-            method: { value: 'GET', validate: function (val) { return val == '' || ['GET', 'PUT'].includes(val); } }
+            method: { value: GetEntityMethod.GET, validate: function (val) { return val == '' || Object.keys(GetEntityMethod).includes(val); } }
         },
         inputs: 1,
         outputs: 1,
@@ -17,10 +23,9 @@
         label: function () {
             return (this === null || this === void 0 ? void 0 : this.method) + " entity";
         },
-        /*oneditprepare: function () {
-          $('#node-config-input-url').val(os.);
-          $('#node-config-input-key').val(this.key);
-        },*/
+        oneditprepare: function () {
+            $('#node-input-method').val(this.method);
+        },
         oneditsave: function () {
             var _a, _b, _c, _d;
             // Access the flow context
@@ -48,6 +53,14 @@
   <div class="form-row">
       <label for="node-input-key"><i class="fa fa-tag"></i> API Key</label>
       <input type="text" id="node-input-key">
+  </div>
+  <div class="form-row">
+    <label for="node-input-method"><i class="fa fa-tasks"></i> Operation</label>
+    <select type="text" id="node-input-method" style="width:70%;">
+      <option value="GET">GET</option>
+      <option value="PUT">PUT</option>
+      <!--<option value="PUT">POST</option>-->
+    </select>
   </div>
 </script>
 <script type="text/html" data-help-name="get-entity">

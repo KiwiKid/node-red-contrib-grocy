@@ -1,5 +1,6 @@
 import { EditorRED } from "node-red";
 import { GetEntityEditorNodeProperties } from "./modules/types";
+import { GetEntityMethod } from "../shared/types";
 
 declare const RED: EditorRED;
 
@@ -10,7 +11,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   defaults: {
     name: { value: "" },
     entity_type: { value: "tasks"},
-    method: { value: 'GET', validate: (val) => val == '' || ['GET', 'PUT'].includes(val) }
+    method: { value: GetEntityMethod.GET, validate: (val) => val == '' || Object.keys(GetEntityMethod).includes(val) }
   },
   inputs: 1,
   outputs: 1,
@@ -19,10 +20,9 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   label: function () {
     return `${this?.method} entity`;
   },
-  /*oneditprepare: function () {
-    $('#node-config-input-url').val(os.);
-    $('#node-config-input-key').val(this.key);
-  },*/
+  oneditprepare: function () {
+    $('#node-input-method').val(this.method);
+  },
   oneditsave: function () {
     // Access the flow context
     const url = $('#node-input-url').val()?.toString() ?? '';
