@@ -10,7 +10,8 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   defaults: {
     name: { value: "" },
     thing: { value: "" },
-    entity_type: { value: "tasks"}
+    entity_type: { value: "tasks"},
+    method: { value: 'GET', validate: (val) => val == '' || ['GET', 'PUT'].includes(val) }
   },
   inputs: 1,
   outputs: 1,

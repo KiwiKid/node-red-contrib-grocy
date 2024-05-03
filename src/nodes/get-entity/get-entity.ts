@@ -36,23 +36,46 @@ const nodeInit: NodeInitializer = (RED): void => {
 
 
       if (typeof payload?.entity_type == 'string') {
-        const url = `${credentialsToUse.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
-    
-        axios.get(url, {
-          headers: {
-            'GROCY-API-KEY': credentialsToUse.key,
-            'Accept': 'application/json'
-          }
-        })
-        .then(response => {
-          msg.payload = response.data; // Attach API response to the output message
-          send(msg);
-          done();
-        })
-        .catch(error => {
-          this.error("Failed to retrieve data: " + error.message);
-          done();
-        });
+        const url = `${credentialsToUse.url}/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
+        
+        switch(payload.method){
+          case 'PUT': 
+            axios.put(url, {
+              headers: {
+                'GROCY-API-KEY': credentialsToUse.key,
+                'Accept': 'application/json'
+              }
+            })
+            .then(response => {
+              msg.payload = response.data; // Attach API response to the output message
+              send(msg);
+              done();
+            })
+            .catch(error => {
+              this.error("Failed to retrieve data: " + error.message);
+              done();
+            });
+            done();
+            break;
+          default:
+          case 'GET': 
+            axios.get(url, {
+              headers: {
+                'GROCY-API-KEY': credentialsToUse.key,
+                'Accept': 'application/json'
+              }
+            })
+            .then(response => {
+              msg.payload = response.data; // Attach API response to the output message
+              send(msg);
+              done();
+            })
+            .catch(error => {
+              this.error("Failed to retrieve data: " + error.message);
+              done();
+            });
+            break;
+        }
       } else {
         this.error("No entity_type provided in the payload");
         done();
