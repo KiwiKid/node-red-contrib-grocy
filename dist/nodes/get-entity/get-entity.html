@@ -26,17 +26,6 @@
         oneditprepare: function () {
             $('#node-input-method').val(this.method);
         },
-        oneditsave: function () {
-            var _a, _b, _c, _d;
-            // Access the flow context
-            var url = (_b = (_a = $('#node-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
-            var key = (_d = (_c = $('#node-input-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
-            // Set values globally using RED.settings
-            RED.settings.set('GROCY_URL', url);
-            RED.settings.set('GROCY_KEY', key);
-            // Notify user about the settings
-            RED.notify("Set Grocy URL: " + url.length + ", Key: " + key.length);
-        }
     });
 
 }());
@@ -46,14 +35,14 @@
     <label for="node-input-name"><i class="icon-tag"></i> Name</label>
     <input type="text" id="node-input-name" placeholder="Name">
   </div>
-  <div class="form-row">
+  <!--<div class="form-row">
       <label for="node-input-url"><i class="fa fa-tag"></i> URL</label>      
       <input type="text" id="node-input-url">
   </div>
   <div class="form-row">
       <label for="node-input-key"><i class="fa fa-tag"></i> API Key</label>
       <input type="text" id="node-input-key">
-  </div>
+  </div>-->
   <div class="form-row">
     <label for="node-input-method"><i class="fa fa-tasks"></i> Operation</label>
     <select type="text" id="node-input-method" style="width:70%;">

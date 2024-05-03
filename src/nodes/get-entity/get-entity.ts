@@ -1,7 +1,9 @@
-import { NodeInitializer, NodeMessageInFlow } from "node-red";
+import { EditorRED, NodeInitializer, NodeMessageInFlow } from "node-red";
 import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 import axios from 'axios'
 import { GetEntityOptions } from "./shared/types";
+
+declare const RED: EditorRED;
 
 const nodeInit: NodeInitializer = (RED): void => {
   function GetEntityNodeConstructor(
@@ -9,6 +11,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     config: GetEntityNodeDef
   ): void {
     RED.nodes.createNode(this, config);
+    
     const credentials = {
       url:  RED.settings.get('GROCY_URL'),
       key:  RED.settings.get('GROCY_KEY')
@@ -16,7 +19,6 @@ const nodeInit: NodeInitializer = (RED): void => {
 
     console.warn('SET URL :'+ credentials.url)
     this.on('input', (msg, send, done) => {
-
       const payload = msg.payload as GetEntityOptions
 
       const credentialsToUse = {
@@ -38,7 +40,7 @@ const nodeInit: NodeInitializer = (RED): void => {
       if (typeof payload?.entity_type == 'string') {
         const url = `${credentialsToUse.url}/api/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
         
-        switch(payload.method){
+        switch(config.method){
           case 'PUT': 
             axios.put(url, {
               headers: {

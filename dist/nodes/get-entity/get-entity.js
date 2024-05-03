@@ -28,7 +28,7 @@ const nodeInit = (RED) => {
             }
             if (typeof (payload === null || payload === void 0 ? void 0 : payload.entity_type) == 'string') {
                 const url = `${credentialsToUse.url}/api/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
-                switch (payload.method) {
+                switch (config.method) {
                     case 'PUT':
                         axios_1.default.put(url, {
                             headers: {

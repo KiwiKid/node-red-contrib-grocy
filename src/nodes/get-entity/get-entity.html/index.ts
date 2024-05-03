@@ -23,7 +23,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   oneditprepare: function () {
     $('#node-input-method').val(this.method);
   },
-  oneditsave: function () {
+  /*oneditsave: function () {
     // Access the flow context
     const url = $('#node-input-url').val()?.toString() ?? '';
     const key = $('#node-input-key').val()?.toString() ?? '';
@@ -33,6 +33,6 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
     RED.settings.set('GROCY_KEY', key);
 
     // Notify user about the settings
-    RED.notify(`Set Grocy URL: ${url.length}, Key: ${key.length}`);
- }
+    RED.notify(`Set Grocy (${this.method}) URL: ${url.length}, Key: ${key.length}`);
+ }*/
 });
