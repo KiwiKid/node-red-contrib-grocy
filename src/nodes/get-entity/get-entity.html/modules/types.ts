@@ -1,8 +1,8 @@
 import { EditorNodeProperties } from "node-red";
-import { GetEntityOptions } from "../../shared/types";
+import { GetEntityMethod, GetEntityOptions } from "../../shared/types";
 
 export interface GetEntityEditorNodeProperties
   extends EditorNodeProperties,
     GetEntityOptions {
-      thing: string
+      method: GetEntityMethod
     }

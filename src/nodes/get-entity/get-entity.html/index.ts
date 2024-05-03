@@ -9,7 +9,6 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   color: "#a6bbcf",
   defaults: {
     name: { value: "" },
-    thing: { value: "" },
     entity_type: { value: "tasks"},
     method: { value: 'GET', validate: (val) => val == '' || ['GET', 'PUT'].includes(val) }
   },
@@ -18,7 +17,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   icon: "file.png",
   paletteLabel: "get entity",
   label: function () {
-    return this.name || "get entity";
+    return `${this?.method} entity`;
   },
   /*oneditprepare: function () {
     $('#node-config-input-url').val(os.);
