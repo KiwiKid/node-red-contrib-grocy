@@ -19,12 +19,28 @@ const nodeInit: NodeInitializer = (RED): void => {
 
       const payload = msg.payload as GetEntityOptions
 
+      const credentialsToUse = {
+        url: payload.url ?? credentials.url,
+        key: payload.key ?? credentials.key,
+      }
+
+      if(credentialsToUse.key == ''){
+        this.error("Failed to get url, either set in node or pass via payload.key");
+        done();
+      }
+
+      if(credentialsToUse.url == ''){
+        this.error("Failed to get url, either set in node or pass via payload.url");
+        done();
+      }
+
+
       if (typeof payload?.entity_type == 'string') {
-        const url = `${credentials.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
+        const url = `${credentialsToUse.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
     
         axios.get(url, {
           headers: {
-            'GROCY-API-KEY': credentials.key,
+            'GROCY-API-KEY': credentialsToUse.key,
             'Accept': 'application/json'
           }
         })

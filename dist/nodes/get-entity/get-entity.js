@@ -12,12 +12,25 @@ const nodeInit = (RED) => {
         };
         console.warn('SET URL :' + credentials.url);
         this.on('input', (msg, send, done) => {
+            var _a, _b;
             const payload = msg.payload;
+            const credentialsToUse = {
+                url: (_a = payload.url) !== null && _a !== void 0 ? _a : credentials.url,
+                key: (_b = payload.key) !== null && _b !== void 0 ? _b : credentials.key,
+            };
+            if (credentialsToUse.key == '') {
+                this.error("Failed to get url, either set in node or pass via payload.key");
+                done();
+            }
+            if (credentialsToUse.url == '') {
+                this.error("Failed to get url, either set in node or pass via payload.url");
+                done();
+            }
             if (typeof (payload === null || payload === void 0 ? void 0 : payload.entity_type) == 'string') {
-                const url = `${credentials.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
+                const url = `${credentialsToUse.url}/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
                 axios_1.default.get(url, {
                     headers: {
-                        'GROCY-API-KEY': credentials.key,
+                        'GROCY-API-KEY': credentialsToUse.key,
                         'Accept': 'application/json'
                     }
                 })
