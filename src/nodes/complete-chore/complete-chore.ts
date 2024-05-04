@@ -14,9 +14,8 @@ const nodeInit: NodeInitializer = (RED): void => {
     RED.nodes.createNode(this, config);
     this.server = RED.nodes.getNode(config.server) as GrocyConfigNode
     this.on('input', (msg, send, done) => {
-      const payload = msg.payload as CompleteChoreOptions
 
-        const url = `${this.server.url}/api/chores/${this.chore_id}/execute`;
+        const url = `${this.server.url}/api/chores/${config.chore_id}/execute`;
         const data = Object.assign({
           "tracked_time": "2024-05-04T10:34:57.830Z",
           "done_by": 0,
