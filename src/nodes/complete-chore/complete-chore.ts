@@ -12,22 +12,12 @@ const nodeInit: NodeInitializer = (RED): void => {
     config: CompleteChoreNodeDef
   ): void {
     RED.nodes.createNode(this, config);
-
-
     this.server = RED.nodes.getNode(config.server) as GrocyConfigNode
-    
-   /* const credentials = {
-      url:  RED.settings.get('GROCY_URL'),
-      key:  RED.settings.get('GROCY_KEY')
-    }*/
-
-    //console.warn('SET URL :'+ credentials.url)
     this.on('input', (msg, send, done) => {
       const payload = msg.payload as CompleteChoreOptions
 
-        const url = `${this.server.url}/chores/${payload.chore_id}/execute`; // Adjust if your Grocy API endpoint differs
+        const url = `${this.server.url}/chores/${payload.chore_id}/execute`;
         
-
         axios.post(url, {
           headers: {
             'GROCY-API-KEY': this.server.gkey,
@@ -35,7 +25,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           }
         })
         .then(response => {
-          msg.payload = response.data; // Attach API response to the output message
+          msg.payload = response.data;
           send(msg);
           done();
         })
@@ -46,9 +36,9 @@ const nodeInit: NodeInitializer = (RED): void => {
         done();
     });
 
-    this.on("close", (done: () => void) => { // Ensure 'done' is used if it's provided.
+    this.on("close", (done: () => void) => { 
       console.log("Cleaning up resources...");
-      if (done) done(); // Call 'done' if there are async tasks.
+      if (done) done();
     });
   }
 

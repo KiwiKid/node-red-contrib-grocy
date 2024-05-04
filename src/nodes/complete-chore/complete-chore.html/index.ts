@@ -10,7 +10,8 @@ RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
   defaults: {
     name: { value: "" },
     server: { value:"", type: "grocy-config" },
-    chore_id: { value: "" }
+    chore_id: { value: "" },
+    complete: { value: true }
   },
   inputs: 1,
   outputs: 1,
@@ -19,19 +20,19 @@ RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
   label: function () {
     return `complete chore (${this.chore_id})`;
   },
-  /*oneditprepare: function () {
-    $('#node-input-method').val(this.method);
+  oneditprepare: function () {
+    $('#node-input-chore_id').val(this.chore_id);
   },
   oneditsave: function () {
     // Access the flow context
-    const url = $('#node-input-url').val()?.toString() ?? '';
-    const key = $('#node-input-key').val()?.toString() ?? '';
+   // const server = $('#node-input-server').val()?.toString() ?? '';
+    const chore_id = $('#node-input-chore-id').val()?.toString() ?? '';
+    const complete = $('#node-input-complete').val()?.toString() ?? '';
 
     // Set values globally using RED.settings
-    RED.settings.set('GROCY_URL', url);
-    RED.settings.set('GROCY_KEY', key);
-
+    //this.server = server
+    this.chore_id = +chore_id;
+    this.complete = complete == "true"
     // Notify user about the settings
-    RED.notify(`Set Grocy (${this.method}) URL: ${url.length}, Key: ${key.length}`);
- }*/
+ }
 });

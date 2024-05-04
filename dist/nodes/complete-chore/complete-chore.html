@@ -8,7 +8,8 @@
         defaults: {
             name: { value: "" },
             server: { value: "", type: "grocy-config" },
-            chore_id: { value: "" }
+            chore_id: { value: "" },
+            complete: { value: true }
         },
         inputs: 1,
         outputs: 1,
@@ -17,6 +18,21 @@
         label: function () {
             return "complete chore (" + this.chore_id + ")";
         },
+        oneditprepare: function () {
+            $('#node-input-chore_id').val(this.chore_id);
+        },
+        oneditsave: function () {
+            var _a, _b, _c, _d;
+            // Access the flow context
+            // const server = $('#node-input-server').val()?.toString() ?? '';
+            var chore_id = (_b = (_a = $('#node-input-chore-id').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+            var complete = (_d = (_c = $('#node-input-complete').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            // Set values globally using RED.settings
+            //this.server = server
+            this.chore_id = +chore_id;
+            this.complete = complete == "true";
+            // Notify user about the settings
+        }
     });
 
 }());

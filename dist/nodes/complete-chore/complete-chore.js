@@ -7,14 +7,9 @@ const nodeInit = (RED) => {
     function GetEntityNodeConstructor(config) {
         RED.nodes.createNode(this, config);
         this.server = RED.nodes.getNode(config.server);
-        /* const credentials = {
-           url:  RED.settings.get('GROCY_URL'),
-           key:  RED.settings.get('GROCY_KEY')
-         }*/
-        //console.warn('SET URL :'+ credentials.url)
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
-            const url = `${this.server.url}/chores/${payload.chore_id}/execute`; // Adjust if your Grocy API endpoint differs
+            const url = `${this.server.url}/chores/${payload.chore_id}/execute`;
             axios_1.default.post(url, {
                 headers: {
                     'GROCY-API-KEY': this.server.gkey,
@@ -22,7 +17,7 @@ const nodeInit = (RED) => {
                 }
             })
                 .then(response => {
-                msg.payload = response.data; // Attach API response to the output message
+                msg.payload = response.data;
                 send(msg);
                 done();
             })
@@ -35,7 +30,7 @@ const nodeInit = (RED) => {
         this.on("close", (done) => {
             console.log("Cleaning up resources...");
             if (done)
-                done(); // Call 'done' if there are async tasks.
+                done();
         });
     }
     RED.nodes.registerType("complete-chore", GetEntityNodeConstructor);
