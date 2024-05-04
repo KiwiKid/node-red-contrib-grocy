@@ -28,7 +28,7 @@ const nodeInit = (RED) => {
                 done();
             })
                 .catch(error => {
-                this.error(`Failed to POST task_id:"${payload.chore_id}" complete (${url} ${this.server.gkey.length > 0 ? 'KEY-SET' : 'no-key ⚠️'}): [error:${JSON.stringify(error)}] `);
+                this.error(`Failed to POST chore_id:"${payload.chore_id}" complete (${url} ${this.server.gkey.length > 0 ? 'KEY-SET' : 'no-key ⚠️'}): [error:${JSON.stringify(error)}] `);
                 done();
             });
             done();

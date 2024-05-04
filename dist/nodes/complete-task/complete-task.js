@@ -14,8 +14,8 @@ const nodeInit = (RED) => {
         //console.warn('SET URL :'+ credentials.url)
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
-            const url = `${this.server.url}/api/tasks/${payload.task_id}/${payload.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
-            axios_1.default.post(url, {
+            const url = `${this.server.url}/api/tasks/${this.task_id}/${this.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
+            axios_1.default.post(url, payload, {
                 headers: {
                     'GROCY-API-KEY': this.server.gkey,
                     'Accept': 'application/json'
@@ -27,7 +27,7 @@ const nodeInit = (RED) => {
                 done();
             })
                 .catch(error => {
-                this.error(`Failed to PUT task_id:"${payload.task_id}" complete:${payload.complete} (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
+                this.error(`Failed to PUT task_id:"${this.task_id}" complete:${this.complete} (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
                 done();
             });
             done();

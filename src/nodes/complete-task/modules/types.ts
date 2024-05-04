@@ -8,6 +8,8 @@ export interface CompleteTaskNodeDef extends NodeDef, CompleteTaskOptions {
 
 export interface CompleteTaskNode extends Node {
     server: GrocyConfigNode
+    task_id: number
+    complete: boolean
 }
 /*
 export type GetEntityNode = Node;
