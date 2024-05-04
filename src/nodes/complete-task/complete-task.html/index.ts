@@ -18,7 +18,7 @@ RED.nodes.registerType<CompleteTaskEditorNodeProperties>("complete-task", {
   icon: "file.png",
   paletteLabel: "complete task",
   label: function () {
-    return `${this.complete ? 'compelete' : 'undo'} grocy task`;
+    return `${this.complete ? 'compelete' : 'undo'} grocy task #${this.task_id}`;
   },
   /*oneditprepare: function () {
     $('#node-input-method').val(this.method);

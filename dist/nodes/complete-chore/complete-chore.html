@@ -16,7 +16,7 @@
         icon: "file.png",
         paletteLabel: "complete chore",
         label: function () {
-            return "complete chore (" + this.chore_id + ")";
+            return "complete chore #" + this.chore_id;
         },
         oneditprepare: function () {
             $('#node-input-chore-id').val(this.chore_id);
@@ -68,13 +68,13 @@
   </div>
 </script>
 <script type="text/html" data-help-name="complete-chore">
-  <p>Complete a task via this node.</p>
+  <p>Complete a chore via this node.</p>
+  <p>(optional payload body)</p>
   <code><pre>
     payload = {
-      entity_type: 'tasks'
-      method: 'PUT' | 'GET'
-      url?: [GROCY-URL]
-      key?: [GROCY-API-KEY]
+      "tracked_time": "2024-05-04T10:34:57.830Z",
+      "done_by": 0,
+      "skipped": false
    }
   </pre></code>
 </script>

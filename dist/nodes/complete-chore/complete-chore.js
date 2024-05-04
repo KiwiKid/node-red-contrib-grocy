@@ -9,7 +9,7 @@ const nodeInit = (RED) => {
         this.server = RED.nodes.getNode(config.server);
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
-            const url = `${this.server.url}/api/chores/${payload.chore_id}/execute`;
+            const url = `${this.server.url}/api/chores/${this.chore_id}/execute`;
             const data = Object.assign({
                 "tracked_time": "2024-05-04T10:34:57.830Z",
                 "done_by": 0,

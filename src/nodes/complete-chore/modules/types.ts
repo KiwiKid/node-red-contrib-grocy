@@ -8,6 +8,7 @@ export interface CompleteChoreNodeDef extends NodeDef, CompleteChoreOptions {
 
 export interface CompleteChoreNode extends Node {
     server: GrocyConfigNode
+    chore_id: number
 }
 /*
 export type GetEntityNode = Node;

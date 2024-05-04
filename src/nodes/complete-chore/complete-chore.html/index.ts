@@ -18,7 +18,7 @@ RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
   icon: "file.png",
   paletteLabel: "complete chore",
   label: function () {
-    return `complete chore (${this.chore_id})`;
+    return `complete chore #${this.chore_id}`;
   },
   oneditprepare: function () {
     $('#node-input-chore-id').val(this.chore_id);
