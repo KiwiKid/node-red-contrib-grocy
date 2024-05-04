@@ -1,6 +1,6 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.3.65",
+  "version": "0.3.71",
   "description": "Wip (pre-release) grocy node set",
   "scripts": {
     "add-node": "node ./utils/add-node.js",
@@ -23,6 +23,8 @@
     "nodes": {
       "transform-text": "./dist/nodes/transform-text/transform-text.js",
       "get-entity": "./dist/nodes/get-entity/get-entity.js",
+      "complete-task": "./dist/nodes/complete-task/complete-task.js",
+      "complete-chore": "./dist/nodes/complete-chore/complete-chore.js",
       "grocy-config": "./dist/nodes/grocy-config/grocy-config.js"
     }
   },

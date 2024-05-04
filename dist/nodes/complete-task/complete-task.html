@@ -1,0 +1,64 @@
+<script type="text/javascript">
+(function () {
+    'use strict';
+
+    RED.nodes.registerType("complete-task", {
+        category: "grocy",
+        color: "#a6bbcf",
+        defaults: {
+            name: { value: "" },
+            server: { value: "", type: "grocy-config" },
+            complete: { value: true },
+            task_id: { value: "" }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "file.png",
+        paletteLabel: "complete task",
+        label: function () {
+            return (this.complete ? 'compelete' : 'undo') + " grocy task";
+        },
+    });
+
+}());
+</script>
+<script type="text/html" data-template-name="complete-task">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row">
+      <label for="node-input-server"><i class="fa fa-tag"></i> Server</label>
+      <input id="node-input-server">
+  </div>
+  <div class="form-row">
+    <label for="node-input-task-id"><i class="fa fa-tag"></i> Task ID</label>
+    <input id="node-input-task-id">
+</div>
+  <!--<div class="form-row">
+    <label for="node-input-method"><i class="fa fa-tasks"></i> Operation</label>
+    <select type="text" id="node-input-method" style="width:70%;">
+      <option value="GET">GET</option>
+      <option value="PUT">PUT</option>
+      <option value="PUT">POST</option>
+    </select>
+  </div>-->
+  <div class="form-row">
+    <label for="node-input-complete"><i class="fa fa-tasks"></i>Complete</label>
+    <select type="text" id="node-input-complete" style="width:70%">
+      <option value="true"> Complete</option>
+      <option value="false">Uncomplete</option> 
+    </select>
+  </div>
+</script>
+<script type="text/html" data-help-name="complete-task">
+  <p>Complete a task via this node.</p>
+  <code><pre>
+    payload = {
+      entity_type: 'tasks'
+      method: 'PUT' | 'GET'
+      url?: [GROCY-URL]
+      key?: [GROCY-API-KEY]
+   }
+  </pre></code>
+</script>

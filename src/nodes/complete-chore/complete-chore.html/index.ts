@@ -1,30 +1,27 @@
 import { EditorRED } from "node-red";
-import { GetEntityEditorNodeProperties } from "./modules/types";
-import { GetEntityMethod } from "../shared/types";
-import { EntityType } from "../../shared/types";
+import { CompleteChoreEditorNodeProperties } from "./modules/types";
 
 declare const RED: EditorRED;
 
 
-RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
+RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
   category: "grocy",
   color: "#a6bbcf",
   defaults: {
     name: { value: "" },
-    entity_type: { value: EntityType.Tasks },
     server: { value:"", type: "grocy-config" },
+    chore_id: { value: "" }
   },
   inputs: 1,
   outputs: 1,
   icon: "file.png",
-  paletteLabel: "get entity",
+  paletteLabel: "complete chore",
   label: function () {
-    return `get grocy ${this.entity_type ? this.entity_type : 'none'}`;
+    return `complete chore (${this.chore_id})`;
   },
-  oneditprepare: function () {
-    $('#node-input-server').val(this.server)
-    $('#node-input-entity-type').val(this.entity_type);
-  },/*
+  /*oneditprepare: function () {
+    $('#node-input-method').val(this.method);
+  },
   oneditsave: function () {
     // Access the flow context
     const url = $('#node-input-url').val()?.toString() ?? '';

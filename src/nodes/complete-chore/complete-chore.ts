@@ -1,15 +1,15 @@
 import { EditorRED, NodeInitializer } from "node-red";
-import { CompleteTaskNode, CompleteTaskNodeDef } from "./modules/types";
+import { CompleteChoreNode, CompleteChoreNodeDef } from "./modules/types";
 import axios from 'axios'
-import { CompleteTaskOptions } from "./shared/types";
+import { CompleteChoreOptions } from "./shared/types";
 import { GrocyConfigNode } from "../shared/types";
 
 declare const RED: EditorRED;
 
 const nodeInit: NodeInitializer = (RED): void => {
   function GetEntityNodeConstructor(
-    this: CompleteTaskNode,
-    config: CompleteTaskNodeDef
+    this: CompleteChoreNode,
+    config: CompleteChoreNodeDef
   ): void {
     RED.nodes.createNode(this, config);
 
@@ -23,10 +23,11 @@ const nodeInit: NodeInitializer = (RED): void => {
 
     //console.warn('SET URL :'+ credentials.url)
     this.on('input', (msg, send, done) => {
-      const payload = msg.payload as CompleteTaskOptions
+      const payload = msg.payload as CompleteChoreOptions
 
-        const url = `${this.server.url}/tasks/${payload.task_id}/${payload.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
+        const url = `${this.server.url}/chores/${payload.chore_id}/execute`; // Adjust if your Grocy API endpoint differs
         
+
         axios.post(url, {
           headers: {
             'GROCY-API-KEY': this.server.gkey,
@@ -39,7 +40,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           done();
         })
         .catch(error => {
-          this.error(`Failed to PUT task_id:"${payload.task_id}" complete:${payload.complete} (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
+          this.error(`Failed to PUT task_id:"${payload.chore_id}" complete (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
           done();
         });
         done();
@@ -51,7 +52,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     });
   }
 
-  RED.nodes.registerType("complete-task", GetEntityNodeConstructor);
+  RED.nodes.registerType("complete-chore", GetEntityNodeConstructor);
 };
 
 export = nodeInit;

@@ -52,6 +52,10 @@
         label: function () {
             return "get grocy " + (this.entity_type ? this.entity_type : 'none');
         },
+        oneditprepare: function () {
+            $('#node-input-server').val(this.server);
+            $('#node-input-entity-type').val(this.entity_type);
+        },
     });
 
 }());
