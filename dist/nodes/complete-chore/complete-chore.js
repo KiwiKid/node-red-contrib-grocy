@@ -15,12 +15,12 @@ const nodeInit = (RED) => {
                 "done_by": 0,
                 "skipped": false
             }, msg.payload);
-            axios_1.default.post(url, {
+            axios_1.default.post(url, data, {
                 headers: {
                     'GROCY-API-KEY': this.server.gkey,
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                data,
             })
                 .then(response => {
                 msg.payload = response.data;
