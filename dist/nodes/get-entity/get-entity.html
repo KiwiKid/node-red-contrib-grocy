@@ -56,6 +56,17 @@
             $('#node-input-server').val(this.server);
             $('#node-input-entity-type').val(this.entity_type);
         },
+        oneditsave: function () {
+            var _a, _b, _c, _d;
+            // Access the flow context
+            var server = (_b = (_a = $('#node-input-server').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+            var et = (_d = (_c = $('#node-input-entity-type').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            // Set values globally using RED.settings
+            this.server = server;
+            this.entity_type = et;
+            // Notify user about the settings
+            RED.notify("Set Grocy (" + this.entity_type + ") URL: " + server);
+        }
     });
 
 }());

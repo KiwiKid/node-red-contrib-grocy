@@ -24,17 +24,17 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   oneditprepare: function () {
     $('#node-input-server').val(this.server)
     $('#node-input-entity-type').val(this.entity_type);
-  },/*
+  },
   oneditsave: function () {
     // Access the flow context
-    const url = $('#node-input-url').val()?.toString() ?? '';
-    const key = $('#node-input-key').val()?.toString() ?? '';
+    const server = $('#node-input-server').val()?.toString() ?? '';
+    const et = $('#node-input-entity-type').val()?.toString() ?? '';
 
     // Set values globally using RED.settings
-    RED.settings.set('GROCY_URL', url);
-    RED.settings.set('GROCY_KEY', key);
+    this.server = server
+    this.entity_type = et
 
     // Notify user about the settings
-    RED.notify(`Set Grocy (${this.method}) URL: ${url.length}, Key: ${key.length}`);
- }*/
+    RED.notify(`Set Grocy (${this.entity_type}) URL: ${server}`);
+ }
 });
