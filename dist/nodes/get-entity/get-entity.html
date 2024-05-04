@@ -42,7 +42,7 @@
         color: "#a6bbcf",
         defaults: {
             name: { value: "" },
-            entity_type: { value: EntityType.Tasks, validate: function (val) { return val == '' || Object.keys(EntityType).includes(val); } },
+            entity_type: { value: EntityType.Tasks },
             server: { value: "", type: "grocy-config" },
         },
         inputs: 1,

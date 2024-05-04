@@ -11,7 +11,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   color: "#a6bbcf",
   defaults: {
     name: { value: "" },
-    entity_type: { value: EntityType.Tasks, validate: (val) => val == '' || Object.keys(EntityType).includes(val) },
+    entity_type: { value: EntityType.Tasks },
     server: { value:"", type: "grocy-config" },
   },
   inputs: 1,

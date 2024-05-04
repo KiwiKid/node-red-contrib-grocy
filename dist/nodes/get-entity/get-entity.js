@@ -7,34 +7,10 @@ const nodeInit = (RED) => {
     function GetEntityNodeConstructor(config) {
         RED.nodes.createNode(this, config);
         this.server = RED.nodes.getNode(config.server);
-        /* const credentials = {
-           url:  RED.settings.get('GROCY_URL'),
-           key:  RED.settings.get('GROCY_KEY')
-         }*/
-        //console.warn('SET URL :'+ credentials.url)
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
             if (typeof (payload === null || payload === void 0 ? void 0 : payload.entity_type) == 'string') {
-                const url = `${this.server.url}/api/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
-                /*            axios.put(url, {
-                              headers: {
-                                'GROCY-API-KEY': credentialsToUse.key,
-                                'Accept': 'application/json'
-                              }
-                            })
-                            .then(response => {
-                              msg.payload = response.data; // Attach API response to the output message
-                              send(msg);
-                              done();
-                            })
-                            .catch(error => {
-                              this.error(`Failed to PUT "${payload.entity_type}" (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
-                              done();
-                            });
-                            done();
-                            break;
-                          default:
-                          case 'GET': */
+                const url = `${this.server.url}/api/objects/${payload.entity_type}`;
                 axios_1.default.get(url, {
                     headers: {
                         'GROCY-API-KEY': this.server.gkey,
@@ -47,7 +23,7 @@ const nodeInit = (RED) => {
                     done();
                 })
                     .catch(error => {
-                    this.error(`Failed to GET "${payload.entity_type}" (${url}):  \n\n${error.message} \n\n[server:${JSON.stringify(this.server, null, 4)}]`);
+                    this.error(`Failed to GET (${url}):  \n\nerror:\n${error.message} \n\n[server:\n${JSON.stringify(this.server, null, 4)}\n]`);
                     done();
                 });
             }
