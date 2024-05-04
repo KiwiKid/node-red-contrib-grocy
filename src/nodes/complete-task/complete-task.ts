@@ -51,7 +51,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     });
   }
 
-  RED.nodes.registerType("get-entity", GetEntityNodeConstructor);
+  RED.nodes.registerType("complete-task", GetEntityNodeConstructor);
 };
 
 export = nodeInit;
