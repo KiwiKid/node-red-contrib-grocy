@@ -74,7 +74,7 @@ const nodeInit: NodeInitializer = (RED): void => {
               done();
             })
             .catch(error => {
-              this.error(`Failed to GET "${payload.entity_type}" (${url}): ${error.message}` + error.message);
+              this.error(`Failed to GET "${payload.entity_type}" (${url}):  \n\n${error.message} \n\n${JSON.stringify(credentialsToUse, null, 4)}`);
               done();
             });
       } else {
