@@ -12,7 +12,6 @@ RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
     server: { value:"", type: "grocy-config" },
     chore_id: { value: "" },
     complete: { value: true },
-    body: { value: "" }
   },
   inputs: 1,
   outputs: 1,
@@ -22,7 +21,8 @@ RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
     return `complete chore (${this.chore_id})`;
   },
   oneditprepare: function () {
-    $('#node-input-chore_id').val(this.chore_id);
+    $('#node-input-chore-id').val(this.chore_id);
+    $('#node-input-complete').val(this.complete ? "true" : "false");
   },
   oneditsave: function () {
     // Access the flow context

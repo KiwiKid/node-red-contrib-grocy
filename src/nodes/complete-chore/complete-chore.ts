@@ -22,7 +22,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           "done_by": 0,
           "skipped": false
         }, msg.payload);
-        
+
         axios.post(url, {
           headers: {
             'GROCY-API-KEY': this.server.gkey,
@@ -36,7 +36,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           done();
         })
         .catch(error => {
-          this.error(`Failed to POST task_id:"${payload.chore_id}" complete (${url}): [error:${JSON.stringify(error)}] `);
+          this.error(`Failed to POST task_id:"${payload.chore_id}" complete (${url} ${this.server.gkey.length > 0 ? 'KEY-SET' : 'no-key ⚠️'}): [error:${JSON.stringify(error)}] `);
           done();
         });
         done();
