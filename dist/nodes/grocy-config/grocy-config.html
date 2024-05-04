@@ -17,18 +17,6 @@
         label: function () {
             return this.name || this.url + " " + (this.gkey.length > 0 ? '[key-set]' : 'nah-bro');
         },
-        oneditprepare: function () {
-            $('#node-config-input-url').val(this.url);
-            $('#node-config-input-gkey').val(this.gkey);
-        },
-        oneditsave: function () {
-            var _a, _b, _c, _d;
-            var url = (_b = (_a = $('#node-config-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
-            this.url = url;
-            var gkey = (_d = (_c = $('#node-config-input-gkey').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
-            this.gkey = gkey;
-            RED.notify("oneditsave " + url + " " + gkey);
-        }
     });
 
 }());

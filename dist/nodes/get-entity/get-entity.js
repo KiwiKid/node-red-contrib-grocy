@@ -7,23 +7,17 @@ const nodeInit = (RED) => {
     function GetEntityNodeConstructor(config) {
         RED.nodes.createNode(this, config);
         this.server = RED.nodes.getNode(config.server);
-        const credentials = {
-            url: RED.settings.get('GROCY_URL'),
-            key: RED.settings.get('GROCY_KEY')
-        };
-        console.warn('SET URL :' + credentials.url);
+        /* const credentials = {
+           url:  RED.settings.get('GROCY_URL'),
+           key:  RED.settings.get('GROCY_KEY')
+         }*/
+        //console.warn('SET URL :'+ credentials.url)
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
-            let credentialsToUse = {
-                url: payload.url,
-                key: payload.key,
+            const credentialsToUse = {
+                url: this.server.url,
+                key: this.server.gkey,
             };
-            if (this.server) {
-                credentialsToUse = {
-                    url: this.server.url,
-                    key: this.server.gkey
-                };
-            }
             if (credentialsToUse.key == '') {
                 this.error("Failed to get url, either set in node or pass via payload.key");
                 done();

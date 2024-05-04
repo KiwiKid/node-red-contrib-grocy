@@ -2,6 +2,7 @@ import { EditorRED, NodeInitializer, NodeMessageInFlow } from "node-red";
 import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 import axios from 'axios'
 import { GetEntityOptions } from "./shared/types";
+import { GrocyConfigNode } from "../shared/types";
 
 declare const RED: EditorRED;
 
@@ -13,26 +14,20 @@ const nodeInit: NodeInitializer = (RED): void => {
     RED.nodes.createNode(this, config);
 
 
-    this.server = RED.nodes.getNode(config.server);
+    this.server = RED.nodes.getNode(config.server) as GrocyConfigNode
     
-    const credentials = {
+   /* const credentials = {
       url:  RED.settings.get('GROCY_URL'),
       key:  RED.settings.get('GROCY_KEY')
-    }
+    }*/
 
-    console.warn('SET URL :'+ credentials.url)
+    //console.warn('SET URL :'+ credentials.url)
     this.on('input', (msg, send, done) => {
       const payload = msg.payload as GetEntityOptions
 
-      let credentialsToUse = {
-        url: payload.url,
-        key: payload.key,
-      }
-      if (this.server) {
-        credentialsToUse = {
-          url: this.server.url,
-          key: this.server.gkey
-        }
+      const credentialsToUse = {
+        url: this.server.url,
+        key: this.server.gkey,
       }
 
       if(credentialsToUse.key == ''){
