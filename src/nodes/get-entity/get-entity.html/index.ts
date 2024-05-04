@@ -1,6 +1,7 @@
 import { EditorRED } from "node-red";
 import { GetEntityEditorNodeProperties } from "./modules/types";
 import { GetEntityMethod } from "../shared/types";
+import { EntityType } from "../../shared/types";
 
 declare const RED: EditorRED;
 
@@ -10,7 +11,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   color: "#a6bbcf",
   defaults: {
     name: { value: "" },
-    entity_type: { value: "tasks"},
+    entity_type: { value: EntityType.Tasks, validate: (val) => val == '' || Object.keys(EntityType).includes(val) },
     method: { value: GetEntityMethod.GET, validate: (val) => val == '' || Object.keys(GetEntityMethod).includes(val) },
     server: { value:"", type: "grocy-config" },
   },

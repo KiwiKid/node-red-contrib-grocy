@@ -1,3 +1,38 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.EntityType = void 0;
+var EntityType;
+(function (EntityType) {
+    EntityType["Batteries"] = "batteries";
+    EntityType["BatteryChargeCycles"] = "battery_charge_cycles";
+    EntityType["Chores"] = "chores";
+    EntityType["ChoresLog"] = "chores_log";
+    EntityType["Equipment"] = "equipment";
+    EntityType["Locations"] = "locations";
+    EntityType["MealPlan"] = "meal_plan";
+    EntityType["MealPlanSections"] = "meal_plan_sections";
+    EntityType["ProductBarcodes"] = "product_barcodes";
+    EntityType["ProductGroups"] = "product_groups";
+    EntityType["Products"] = "products";
+    EntityType["ProductsAveragePrice"] = "products_average_price";
+    EntityType["ProductsLastPurchased"] = "products_last_purchased";
+    EntityType["QuantityUnitConversions"] = "quantity_unit_conversions";
+    EntityType["QuantityUnitConversionsResolved"] = "quantity_unit_conversions_resolved";
+    EntityType["QuantityUnits"] = "quantity_units";
+    EntityType["Recipes"] = "recipes";
+    EntityType["RecipesNestings"] = "recipes_nestings";
+    EntityType["RecipesPos"] = "recipes_pos";
+    EntityType["RecipesPosResolved"] = "recipes_pos_resolved";
+    EntityType["ShoppingList"] = "shopping_list";
+    EntityType["ShoppingLists"] = "shopping_lists";
+    EntityType["ShoppingLocations"] = "shopping_locations";
+    EntityType["Stock"] = "stock";
+    EntityType["StockCurrentLocations"] = "stock_current_locations";
+    EntityType["StockLog"] = "stock_log";
+    EntityType["TaskCategories"] = "task_categories";
+    EntityType["Tasks"] = "tasks";
+    EntityType["Userentities"] = "userentities";
+    EntityType["Userfields"] = "userfields";
+    EntityType["Userobject"] = "userobject";
+})(EntityType = exports.EntityType || (exports.EntityType = {}));
 //# sourceMappingURL=types.js.map
