@@ -59,7 +59,7 @@ const nodeInit = (RED) => {
                     done();
                 })
                     .catch(error => {
-                    this.error(`Failed to GET "${payload.entity_type}" (${url}):  \n\n${error.message} \n\n${JSON.stringify(credentialsToUse, null, 4)}`);
+                    this.error(`Failed to GET "${payload.entity_type}" (${url}):  \n\n${error.message} \n\n[server:${JSON.stringify(this.server, null, 4)}]`);
                     done();
                 });
             }
