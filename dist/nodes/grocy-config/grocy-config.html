@@ -9,7 +9,7 @@
                 value: "127.0.0.1:9283",
                 required: true
             },
-            key: {
+            gkey: {
                 value: "",
                 required: true
             },
@@ -19,15 +19,15 @@
         },
         oneditprepare: function () {
             $('#node-config-input-url').val(this.url);
-            $('#node-config-input-api-key').val(this.key);
+            $('#node-config-input-gkey').val(this.gkey);
         },
         oneditsave: function () {
             var _a, _b, _c, _d;
             var url = (_b = (_a = $('#node-config-input-url').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
             this.url = url;
-            var key = (_d = (_c = $('#node-config-input-api-key').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
-            this.key = key;
-            RED.notify("oneditsave " + url + " " + key);
+            var gkey = (_d = (_c = $('#node-config-input-gkey').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            this.gkey = gkey;
+            RED.notify("oneditsave " + url + " " + gkey);
         }
     });
 
@@ -39,8 +39,8 @@
       <input type="text" id="node-config-input-url">
     </div>
     <div class="form-row">
-      <label for="node-config-input-api-key"><i class="icon-tag"></i> API Key</label>
-      <input type="text" id="node-config-input-api-key">
+      <label for="node-config-input-gkey"><i class="icon-tag"></i> API Key</label>
+      <input type="text" id="node-config-input-gkey">
     </div>
 </script>
 <script type="text/html" data-help-name="grocy-config">

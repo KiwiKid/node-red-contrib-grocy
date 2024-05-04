@@ -2,6 +2,7 @@
 export interface GetEntityOptions {
     entity_type: string
     method: GetEntityMethod
+    server?: any
     url?: string
     key?: string
  }

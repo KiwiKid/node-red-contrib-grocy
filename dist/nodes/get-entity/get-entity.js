@@ -6,18 +6,24 @@ const axios_1 = __importDefault(require("axios"));
 const nodeInit = (RED) => {
     function GetEntityNodeConstructor(config) {
         RED.nodes.createNode(this, config);
+        this.server = RED.nodes.getNode(config.server);
         const credentials = {
             url: RED.settings.get('GROCY_URL'),
             key: RED.settings.get('GROCY_KEY')
         };
         console.warn('SET URL :' + credentials.url);
         this.on('input', (msg, send, done) => {
-            var _a, _b;
             const payload = msg.payload;
-            const credentialsToUse = {
-                url: (_a = payload.url) !== null && _a !== void 0 ? _a : credentials.url,
-                key: (_b = payload.key) !== null && _b !== void 0 ? _b : credentials.key,
+            let credentialsToUse = {
+                url: payload.url,
+                key: payload.key,
             };
+            if (this.server) {
+                credentialsToUse = {
+                    url: this.server.url,
+                    key: this.server.gkey
+                };
+            }
             if (credentialsToUse.key == '') {
                 this.error("Failed to get url, either set in node or pass via payload.key");
                 done();

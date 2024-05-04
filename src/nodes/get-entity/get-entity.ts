@@ -11,6 +11,9 @@ const nodeInit: NodeInitializer = (RED): void => {
     config: GetEntityNodeDef
   ): void {
     RED.nodes.createNode(this, config);
+
+
+    this.server = RED.nodes.getNode(config.server);
     
     const credentials = {
       url:  RED.settings.get('GROCY_URL'),
@@ -21,9 +24,15 @@ const nodeInit: NodeInitializer = (RED): void => {
     this.on('input', (msg, send, done) => {
       const payload = msg.payload as GetEntityOptions
 
-      const credentialsToUse = {
-        url: payload.url ?? credentials.url,
-        key: payload.key ?? credentials.key,
+      let credentialsToUse = {
+        url: payload.url,
+        key: payload.key,
+      }
+      if (this.server) {
+        credentialsToUse = {
+          url: this.server.url,
+          key: this.server.gkey
+        }
       }
 
       if(credentialsToUse.key == ''){

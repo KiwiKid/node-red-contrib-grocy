@@ -6,12 +6,13 @@ declare const RED: EditorRED;
 
 
 RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
-  category: "function",
+  category: "grocy",
   color: "#a6bbcf",
   defaults: {
     name: { value: "" },
     entity_type: { value: "tasks"},
-    method: { value: GetEntityMethod.GET, validate: (val) => val == '' || Object.keys(GetEntityMethod).includes(val) }
+    method: { value: GetEntityMethod.GET, validate: (val) => val == '' || Object.keys(GetEntityMethod).includes(val) },
+    server: { value:"", type: "grocy-config" },
   },
   inputs: 1,
   outputs: 1,
