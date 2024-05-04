@@ -15,11 +15,11 @@ const nodeInit = (RED) => {
                     'GROCY-API-KEY': this.server.gkey,
                     'Accept': 'application/json'
                 },
-                data: {
+                data: Object.assign({
                     "tracked_time": "2024-05-04T10:34:57.830Z",
                     "done_by": 0,
                     "skipped": false
-                }
+                }, msg.payload)
             })
                 .then(response => {
                 msg.payload = response.data;

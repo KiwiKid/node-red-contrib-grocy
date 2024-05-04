@@ -11,7 +11,8 @@ RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
     name: { value: "" },
     server: { value:"", type: "grocy-config" },
     chore_id: { value: "" },
-    complete: { value: true }
+    complete: { value: true },
+    body: { value: "" }
   },
   inputs: 1,
   outputs: 1,

@@ -13,7 +13,6 @@ const nodeInit: NodeInitializer = (RED): void => {
   ): void {
     RED.nodes.createNode(this, config);
 
-
     this.server = RED.nodes.getNode(config.server) as GrocyConfigNode
     
     this.on('input', (msg, send, done) => {

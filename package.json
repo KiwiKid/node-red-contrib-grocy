@@ -1,6 +1,6 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.3.79",
+  "version": "0.3.80",
   "description": "Wip (pre-release) grocy node set",
   "scripts": {
     "add-node": "node ./utils/add-node.js",
