@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/@kiwikid%2Fnode-red-contrib-grocy.svg)](https://badge.fury.io/js/@kiwikid%2Fnode-red-contrib-grocy)
 
 
-## Install [WARNING: WIP/DOES NOT WORK YET]
+## Install [🚧 alpha-testing 🚧]
 ```
 # navigate to node red instance and run:
 yarn add @kiwikid/node-red-contrib-grocy
