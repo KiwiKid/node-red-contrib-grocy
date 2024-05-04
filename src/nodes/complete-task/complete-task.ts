@@ -25,7 +25,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     this.on('input', (msg, send, done) => {
       const payload = msg.payload as CompleteTaskOptions
 
-        const url = `${this.server.url}/tasks/${payload.task_id}/${payload.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
+        const url = `${this.server.url}/api/tasks/${payload.task_id}/${payload.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
         
         axios.post(url, {
           headers: {

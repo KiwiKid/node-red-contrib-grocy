@@ -14,7 +14,7 @@ const nodeInit = (RED) => {
         //console.warn('SET URL :'+ credentials.url)
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
-            const url = `${this.server.url}/tasks/${payload.task_id}/${payload.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
+            const url = `${this.server.url}/api/tasks/${payload.task_id}/${payload.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
             axios_1.default.post(url, {
                 headers: {
                     'GROCY-API-KEY': this.server.gkey,
