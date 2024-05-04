@@ -4,7 +4,7 @@ import { GrocyConfigEditorNodeProperties } from "./modules/types";
 declare const RED: EditorRED;
 
 RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
-  category: "grocy",
+  category: "config",
   defaults: {
     url: {
       value: "127.0.0.1:9283",
@@ -16,7 +16,7 @@ RED.nodes.registerType<GrocyConfigEditorNodeProperties>("grocy-config", {
     },
   },
   label: function () {
-    return this.name || this.url;
+    return this.name || `${this.url} ${this.gkey.length > 0 ? '[key-set]' : 'nah-bro'}`;
   },
   oneditprepare: function () {
     $('#node-config-input-url').val(this.url);
