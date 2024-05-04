@@ -40,13 +40,10 @@ const nodeInit: NodeInitializer = (RED): void => {
         done();
       }
 
-
       if (typeof payload?.entity_type == 'string') {
         const url = `${credentialsToUse.url}/api/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
         
-        switch(config.method){
-          case 'PUT': 
-            axios.put(url, {
+/*            axios.put(url, {
               headers: {
                 'GROCY-API-KEY': credentialsToUse.key,
                 'Accept': 'application/json'
@@ -58,13 +55,13 @@ const nodeInit: NodeInitializer = (RED): void => {
               done();
             })
             .catch(error => {
-              this.error(`Failed to PUT "${payload.entity_type}" (${url}): ` + error.message);
+              this.error(`Failed to PUT "${payload.entity_type}" (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
               done();
             });
             done();
             break;
           default:
-          case 'GET': 
+          case 'GET': */
             axios.get(url, {
               headers: {
                 'GROCY-API-KEY': credentialsToUse.key,
@@ -80,14 +77,10 @@ const nodeInit: NodeInitializer = (RED): void => {
               this.error(`Failed to GET "${payload.entity_type}" (${url}): ${error.message}` + error.message);
               done();
             });
-            break;
-        }
       } else {
         this.error("No entity_type provided in the payload");
         done();
       }
-
-
     });
 
     this.on("close", (done: () => void) => { // Ensure 'done' is used if it's provided.

@@ -12,7 +12,6 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   defaults: {
     name: { value: "" },
     entity_type: { value: EntityType.Tasks, validate: (val) => val == '' || Object.keys(EntityType).includes(val) },
-    method: { value: GetEntityMethod.GET, validate: (val) => val == '' || Object.keys(GetEntityMethod).includes(val) },
     server: { value:"", type: "grocy-config" },
   },
   inputs: 1,
@@ -20,12 +19,12 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   icon: "file.png",
   paletteLabel: "get entity",
   label: function () {
-    return `${this?.method} entity`;
+    return `get grocy ${this.entity_type ? this.entity_type : 'none'}`;
   },
-  oneditprepare: function () {
+  /*oneditprepare: function () {
     $('#node-input-method').val(this.method);
   },
-  /*oneditsave: function () {
+  oneditsave: function () {
     // Access the flow context
     const url = $('#node-input-url').val()?.toString() ?? '';
     const key = $('#node-input-key').val()?.toString() ?? '';

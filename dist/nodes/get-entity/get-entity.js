@@ -28,44 +28,40 @@ const nodeInit = (RED) => {
             }
             if (typeof (payload === null || payload === void 0 ? void 0 : payload.entity_type) == 'string') {
                 const url = `${credentialsToUse.url}/api/objects/${payload.entity_type}`; // Adjust if your Grocy API endpoint differs
-                switch (config.method) {
-                    case 'PUT':
-                        axios_1.default.put(url, {
-                            headers: {
+                /*            axios.put(url, {
+                              headers: {
                                 'GROCY-API-KEY': credentialsToUse.key,
                                 'Accept': 'application/json'
-                            }
-                        })
+                              }
+                            })
                             .then(response => {
-                            msg.payload = response.data; // Attach API response to the output message
-                            send(msg);
-                            done();
-                        })
+                              msg.payload = response.data; // Attach API response to the output message
+                              send(msg);
+                              done();
+                            })
                             .catch(error => {
-                            this.error(`Failed to PUT "${payload.entity_type}" (${url}): ` + error.message);
+                              this.error(`Failed to PUT "${payload.entity_type}" (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
+                              done();
+                            });
                             done();
-                        });
-                        done();
-                        break;
-                    default:
-                    case 'GET':
-                        axios_1.default.get(url, {
-                            headers: {
-                                'GROCY-API-KEY': credentialsToUse.key,
-                                'Accept': 'application/json'
-                            }
-                        })
-                            .then(response => {
-                            msg.payload = response.data; // Attach API response to the output message
-                            send(msg);
-                            done();
-                        })
-                            .catch(error => {
-                            this.error(`Failed to GET "${payload.entity_type}" (${url}): ${error.message}` + error.message);
-                            done();
-                        });
-                        break;
-                }
+                            break;
+                          default:
+                          case 'GET': */
+                axios_1.default.get(url, {
+                    headers: {
+                        'GROCY-API-KEY': credentialsToUse.key,
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(response => {
+                    msg.payload = response.data; // Attach API response to the output message
+                    send(msg);
+                    done();
+                })
+                    .catch(error => {
+                    this.error(`Failed to GET "${payload.entity_type}" (${url}): ${error.message}` + error.message);
+                    done();
+                });
             }
             else {
                 this.error("No entity_type provided in the payload");

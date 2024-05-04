@@ -2,12 +2,6 @@
 (function () {
     'use strict';
 
-    var GetEntityMethod;
-    (function (GetEntityMethod) {
-        GetEntityMethod["GET"] = "GET";
-        GetEntityMethod["PUT"] = "PUT";
-    })(GetEntityMethod || (GetEntityMethod = {}));
-
     var EntityType;
     (function (EntityType) {
         EntityType["Batteries"] = "batteries";
@@ -49,7 +43,6 @@
         defaults: {
             name: { value: "" },
             entity_type: { value: EntityType.Tasks, validate: function (val) { return val == '' || Object.keys(EntityType).includes(val); } },
-            method: { value: GetEntityMethod.GET, validate: function (val) { return val == '' || Object.keys(GetEntityMethod).includes(val); } },
             server: { value: "", type: "grocy-config" },
         },
         inputs: 1,
@@ -57,10 +50,7 @@
         icon: "file.png",
         paletteLabel: "get entity",
         label: function () {
-            return (this === null || this === void 0 ? void 0 : this.method) + " entity";
-        },
-        oneditprepare: function () {
-            $('#node-input-method').val(this.method);
+            return "get grocy " + (this.entity_type ? this.entity_type : 'none');
         },
     });
 
@@ -79,13 +69,16 @@
       <label for="node-input-server"><i class="fa fa-tag"></i> Server</label>
       <input id="node-input-server">
   </div>
-  <div class="form-row">
+  <!--<div class="form-row">
     <label for="node-input-method"><i class="fa fa-tasks"></i> Operation</label>
     <select type="text" id="node-input-method" style="width:70%;">
       <option value="GET">GET</option>
       <option value="PUT">PUT</option>
-      <!--<option value="PUT">POST</option>-->
+      <option value="PUT">POST</option>
     </select>
+  </div>-->
+  <div class="form-row">
+    <label for="node-input-entity-type"><i class="fa fa-tasks"></i>Entity Type</label>
     <select type="text" id="node-input-entity-type" style="width:70%">
       <option value="batteries"> Batteries</option>
       <option value="battery_charge_cycles"> BatteryChargeCycles</option> 
