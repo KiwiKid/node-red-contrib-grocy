@@ -10,16 +10,17 @@ const nodeInit = (RED) => {
         this.on('input', (msg, send, done) => {
             const payload = msg.payload;
             const url = `${this.server.url}/api/chores/${payload.chore_id}/execute`;
+            const data = Object.assign({
+                "tracked_time": "2024-05-04T10:34:57.830Z",
+                "done_by": 0,
+                "skipped": false
+            }, msg.payload);
             axios_1.default.post(url, {
                 headers: {
                     'GROCY-API-KEY': this.server.gkey,
                     'Accept': 'application/json'
                 },
-                data: Object.assign({
-                    "tracked_time": "2024-05-04T10:34:57.830Z",
-                    "done_by": 0,
-                    "skipped": false
-                }, msg.payload)
+                data,
             })
                 .then(response => {
                 msg.payload = response.data;
@@ -27,7 +28,7 @@ const nodeInit = (RED) => {
                 done();
             })
                 .catch(error => {
-                this.error(`Failed to POST task_id:"${payload.chore_id}" complete (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
+                this.error(`Failed to POST task_id:"${payload.chore_id}" complete (${url}): [error:${JSON.stringify(error)}] `);
                 done();
             });
             done();
