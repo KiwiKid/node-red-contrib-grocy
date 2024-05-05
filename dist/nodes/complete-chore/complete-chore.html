@@ -16,7 +16,7 @@
         icon: "file.png",
         paletteLabel: "complete chore",
         label: function () {
-            return "complete chore #" + this.chore_id;
+            return "complete chore #".concat(this.chore_id);
         },
         oneditprepare: function () {
             $('#node-input-chore-id').val(this.chore_id);
@@ -36,7 +36,7 @@
         }
     });
 
-}());
+})();
 </script>
 <script type="text/html" data-template-name="complete-chore">
   <div class="form-row">

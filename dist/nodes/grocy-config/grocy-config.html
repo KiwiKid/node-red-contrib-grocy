@@ -15,11 +15,22 @@
             },
         },
         label: function () {
-            return this.name || this.url + " " + (this.gkey.length > 0 ? '[key-set]' : 'nah-bro');
+            return this.name || "".concat(this.url, " ").concat(this.gkey.length > 0 ? '[key-set]' : 'nah-bro');
         },
+        /* oneditprepare: function () {
+           $('#node-config-input-url').val(this.url);
+           $('#node-config-input-gkey').val(this.gkey);
+         },
+        /* oneditsave: function () {
+           const url = $('#node-config-input-url').val()?.toString() ?? ''
+           this.url = url;
+           const gkey = $('#node-config-input-gkey').val()?.toString() ?? ''
+           this.gkey = gkey
+           RED.notify(`oneditsave ${url} ${gkey}`)
+         }*/
     });
 
-}());
+})();
 </script>
 <script type="text/html" data-template-name="grocy-config">
     <div class="form-row">

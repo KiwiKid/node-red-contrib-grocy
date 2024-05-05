@@ -1,6 +1,4 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
-export type GetEntityNode = Node;
-*/
+//export interface GetEntityNoder extends {};
 //# sourceMappingURL=types.js.map

@@ -18,7 +18,6 @@ export interface GrocyConfig {
 export interface GrocyConfigNode extends Node { 
     url: string;
     gkey: string;
-    version: string;
 }
 
 

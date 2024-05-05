@@ -5,8 +5,8 @@ import { GrocyConfigNode } from "../../shared/types";
 export interface GetEntityNodeDef extends NodeDef, GetEntityOptions {}
 
 export interface GetEntityNode extends Node {
-    server: GrocyConfigNode
+    server: any
 }
-/*
-export type GetEntityNode = Node;
-*/
+
+//export interface GetEntityNoder extends {};
+

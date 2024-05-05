@@ -50,7 +50,7 @@
         icon: "file.png",
         paletteLabel: "get entity",
         label: function () {
-            return "get grocy " + (this.entity_type ? this.entity_type : 'none');
+            return "get grocy ".concat(this.entity_type ? this.entity_type : 'none');
         },
         oneditprepare: function () {
             $('#node-input-server').val(this.server);
@@ -65,11 +65,11 @@
             this.server = server;
             this.entity_type = et;
             // Notify user about the settings
-            RED.notify("Set Grocy (" + this.entity_type + ") URL: " + server);
+            RED.notify("Set Grocy (".concat(this.entity_type, ") URL: ").concat(server));
         }
     });
 
-}());
+})();
 </script>
 <script type="text/html" data-template-name="get-entity">
   <div class="form-row">
