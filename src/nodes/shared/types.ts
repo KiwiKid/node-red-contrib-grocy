@@ -10,7 +10,7 @@ export type GrocyConfigNode = Node;
 
 */
 
-export interface GrocyConfig {
+export interface GrocyConfigOptions {
     url: string;
     gkey: string;
 }
