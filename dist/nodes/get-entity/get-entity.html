@@ -152,9 +152,18 @@
 <script type="text/html" data-help-name="get-entity">
   <p>(🚧 alpha-testing 🚧) node to interact with grocy API (GET/UPDATE on the entity_type objects API).</p>
   <code><pre>
+
+    get-entities - /objects/{entity_type}/{?entity_id} -  The generic get entity endpoint (entity_type is configurable via node, filters via payload, optional id)
+
     payload = {
-      entity_type: 'tasks'
-      method: 'PUT' | 'GET'
+      query: ['category=p1'],
+      order: 'asc',
+      limit: 10,
+      offset: 0
    }
+
+   
+
+
   </pre></code>
 </script>
