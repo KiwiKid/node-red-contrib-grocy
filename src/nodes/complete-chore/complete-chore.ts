@@ -1,7 +1,6 @@
 import { EditorRED, NodeInitializer } from "node-red";
 import { CompleteChoreNode, CompleteChoreNodeDef } from "./modules/types";
 import axios from 'axios'
-import { CompleteChoreOptions } from "./shared/types";
 import { GrocyConfigNode } from "../shared/types";
 
 declare const RED: EditorRED;

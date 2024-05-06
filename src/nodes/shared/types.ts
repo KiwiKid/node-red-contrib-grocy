@@ -1,6 +1,4 @@
 import { Node } from "node-red";
-import * as http from 'http';
-import * as https from 'https';
 
 /*
 export interface GrocyConfigNodeDef extends NodeDef {
@@ -14,35 +12,27 @@ export type GrocyConfigNode = Node;
 */
 
 export const getSpecificObject = async (serverUrl:string, gKey: string, entity_type: EntityType, id: number): Promise<unknown> => {
-  const url = new URL(`${serverUrl}/api/objects/${entity_type}/${id}`);
-    const protocol = url.protocol === 'https:' ? https : http;
+  const url = `${serverUrl}/api/objects/${entity_type}/${id}`;
+    const headers = {
+        'GROCY-API-KEY': gKey,
+        'Accept': 'application/json'
+    };
 
-    
-  return new Promise((resolve, reject) => {
-      const options = {
-          headers: {
-              'GROCY-API-KEY': gKey,
-              'Accept': 'application/json'
-          }
-      };
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: headers
+        });
 
-      const req = protocol.get(url, options, (res) => {
-          let data = '';
-          res.on('data', (chunk) => {
-              data += chunk;
-          });
-          res.on('end', () => {
-              resolve(JSON.parse(data));
-          });
-      });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
-      req.on('error', (error) => {
-          console.error(`Failed to GET (${url.href}):  \n\nerror:\n${JSON.stringify(error, null, 4)}`);
-          reject(error);
-      });
-
-      req.end();
-  });
+        return await response.json();
+    } catch (error) {
+        console.error(`Failed to GET (${url}): \n\nerror:\n${error}`);
+        throw error; // Rethrow to ensure error handling is consistent with previous behavior
+    }
 }
 
 export interface GrocyConfig {

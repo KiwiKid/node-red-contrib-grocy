@@ -1,27 +1,6 @@
 <script type="text/javascript">
-(function (http, https) {
+(function () {
     'use strict';
-
-    function _interopNamespace(e) {
-        if (e && e.__esModule) return e;
-        var n = Object.create(null);
-        if (e) {
-            Object.keys(e).forEach(function (k) {
-                if (k !== 'default') {
-                    var d = Object.getOwnPropertyDescriptor(e, k);
-                    Object.defineProperty(n, k, d.get ? d : {
-                        enumerable: true,
-                        get: function () { return e[k]; }
-                    });
-                }
-            });
-        }
-        n["default"] = e;
-        return Object.freeze(n);
-    }
-
-    var http__namespace = /*#__PURE__*/_interopNamespace(http);
-    var https__namespace = /*#__PURE__*/_interopNamespace(https);
 
     /******************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -92,32 +71,35 @@
 
     */
     var getSpecificObject = function (serverUrl, gKey, entity_type, id) { return __awaiter(void 0, void 0, void 0, function () {
-        var url, protocol;
+        var url, headers, response, error_1;
         return __generator(this, function (_a) {
-            url = new URL("".concat(serverUrl, "/api/objects/").concat(entity_type, "/").concat(id));
-            protocol = url.protocol === 'https:' ? https__namespace : http__namespace;
-            return [2 /*return*/, new Promise(function (resolve, reject) {
-                    var options = {
-                        headers: {
-                            'GROCY-API-KEY': gKey,
-                            'Accept': 'application/json'
-                        }
+            switch (_a.label) {
+                case 0:
+                    url = "".concat(serverUrl, "/api/objects/").concat(entity_type, "/").concat(id);
+                    headers = {
+                        'GROCY-API-KEY': gKey,
+                        'Accept': 'application/json'
                     };
-                    var req = protocol.get(url, options, function (res) {
-                        var data = '';
-                        res.on('data', function (chunk) {
-                            data += chunk;
-                        });
-                        res.on('end', function () {
-                            resolve(JSON.parse(data));
-                        });
-                    });
-                    req.on('error', function (error) {
-                        console.error("Failed to GET (".concat(url.href, "):  \n\nerror:\n").concat(JSON.stringify(error, null, 4)));
-                        reject(error);
-                    });
-                    req.end();
-                })];
+                    _a.label = 1;
+                case 1:
+                    _a.trys.push([1, 4, , 5]);
+                    return [4 /*yield*/, fetch(url, {
+                            method: 'GET',
+                            headers: headers
+                        })];
+                case 2:
+                    response = _a.sent();
+                    if (!response.ok) {
+                        throw new Error("HTTP error! status: ".concat(response.status));
+                    }
+                    return [4 /*yield*/, response.json()];
+                case 3: return [2 /*return*/, _a.sent()];
+                case 4:
+                    error_1 = _a.sent();
+                    console.error("Failed to GET (".concat(url, "): \n\nerror:\n").concat(error_1));
+                    throw error_1; // Rethrow to ensure error handling is consistent with previous behavior
+                case 5: return [2 /*return*/];
+            }
         });
     }); };
     var EntityType;
@@ -163,36 +145,38 @@
             server: { value: "", type: "grocy-config" },
             chore_id: { value: "" },
             complete: { value: true },
+            chore_name: { value: "" },
         },
         inputs: 1,
         outputs: 1,
         icon: "file.png",
         paletteLabel: "complete chore",
         label: function () {
-            return "complete chore #".concat(this.chore_id);
+            return "complete chore #".concat(this.chore_name);
         },
         oneditprepare: function () {
-            var _a, _b;
-            if (this.chore_id > 0) {
-                getSpecificObject((_a = this.server) === null || _a === void 0 ? void 0 : _a.url, (_b = this.server) === null || _b === void 0 ? void 0 : _b.gkey, EntityType.Chores, this.chore_id)
+            $('#node-input-chore-id').val(this.chore_id);
+            $('#node-input-complete').val(this.complete ? "true" : "false");
+        },
+        oneditsave: function () {
+            var _this = this;
+            var _a, _b, _c, _d, _e, _f;
+            // Access the flow context
+            // const server = $('#node-input-server').val()?.toString() ?? '';
+            var chore_id = (_b = (_a = $('#node-input-chore-id').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+            var complete = (_d = (_c = $('#node-input-complete').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            if (chore_id) {
+                getSpecificObject((_e = this.server) === null || _e === void 0 ? void 0 : _e.url, (_f = this.server) === null || _f === void 0 ? void 0 : _f.gkey, EntityType.Chores, this.chore_id)
                     .then(function (obj) {
                     // Display the result in a <pre> block
                     var pre = $('<pre>').text(JSON.stringify(obj, null, 2));
                     $('#node-input-chore-id').after(pre);
+                    _this.chore_name = JSON.stringify(obj, null, 2);
                 })
                     .catch(function (error) {
                     console.error('Error fetching chore data:', error);
                 });
             }
-            $('#node-input-chore-id').val(this.chore_id);
-            $('#node-input-complete').val(this.complete ? "true" : "false");
-        },
-        oneditsave: function () {
-            var _a, _b, _c, _d;
-            // Access the flow context
-            // const server = $('#node-input-server').val()?.toString() ?? '';
-            var chore_id = (_b = (_a = $('#node-input-chore-id').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
-            var complete = (_d = (_c = $('#node-input-complete').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
             // Set values globally using RED.settings
             //this.server = server
             this.chore_id = +chore_id;
@@ -201,7 +185,7 @@
         }
     });
 
-})(http, https);
+})();
 </script>
 <script type="text/html" data-template-name="complete-chore">
   <div class="form-row">
