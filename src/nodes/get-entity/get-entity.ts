@@ -31,7 +31,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           }
         })
       }
-      const url = `${this.server.url}/api/objects/${config.entity_type}?${QueryString.stringify(msg.payload)}`; 
+      const url = `${this.server.url}/api/objects/${config.entity_type}${config.entity_id ? `/${config.entity_id}` : ''}?${QueryString.stringify(msg.payload)}`; 
       axios.get(url, {
         headers: {
           'GROCY-API-KEY': this.server.gkey,

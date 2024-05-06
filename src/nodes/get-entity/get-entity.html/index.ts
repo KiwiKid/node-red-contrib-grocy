@@ -12,6 +12,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   defaults: {
     name: { value: "" },
     entity_type: { value: EntityType.Tasks },
+    entity_id: { value: ""},
     server: { value:"", type: "grocy-config" },
   },
   inputs: 1,
@@ -24,15 +25,18 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   oneditprepare: function () {
     $('#node-input-server').val(this.server)
     $('#node-input-entity-type').val(this.entity_type);
+    $('#node-input-entity-id').val(this.entity_id ? this.entity_id : '');
   },
   oneditsave: function () {
     // Access the flow context
     const server = $('#node-input-server').val()?.toString() ?? '';
     const et = $('#node-input-entity-type').val()?.toString() ?? '';
+    const etId = $('#node-input-entity-id').val()?.toString() ?? '';
 
     // Set values globally using RED.settings
     this.server = server
     this.entity_type = et
+    this.entity_id = etId
 
     // Notify user about the settings
     RED.notify(`Set Grocy (${this.entity_type}) URL: ${server}`);
