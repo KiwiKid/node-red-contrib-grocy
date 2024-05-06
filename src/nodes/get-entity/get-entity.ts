@@ -39,12 +39,12 @@ const nodeInit: NodeInitializer = (RED): void => {
         }
       })
       .then(response => {
-        msg.payload = response.data; // Attach API response to the output message
+        msg.payload = response.data;
         send(msg);
         done();
       })
       .catch(error => {
-        this.error(`Failed to GET (${url}):  \n\nerror:\n${error.message} \n\n[server:\n${JSON.stringify(this.server, null, 4)}\n]`);
+        this.error(`Failed to post task_id:(${url}) \n\n(payload:${JSON.stringify(msg.payload, null, 4)}) \n\nconfig:${JSON.stringify(config, null, 4)}: \n\n[error:${JSON.stringify(error, null, 4)}]`);
         done();
       });
 

@@ -1,6 +1,6 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.3.108",
+  "version": "0.3.110",
   "description": "[🚧 alpha-testing 🚧] Set of node-red nodes for calling the grocy api",
   "scripts": {
     "add-node": "node ./utils/add-node.js",

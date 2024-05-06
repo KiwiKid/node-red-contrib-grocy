@@ -45,7 +45,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           done();
         })
         .catch(error => {
-          this.error(`Failed to post task_id:"${JSON.stringify(config)} (${url}): \n[error:${JSON.stringify(error)}]`);
+          this.error(`Failed to post task_id:(${url}) \n\n(payload:${JSON.stringify(payload, null, 4)}) \n\nconfig:${JSON.stringify(config, null, 4)}: \n\n[error:${JSON.stringify(error, null, 4)}]`);
           done();
         });
         done();
