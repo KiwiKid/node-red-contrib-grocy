@@ -99,38 +99,50 @@
   <div class="form-row">
     <label for="node-input-entity-type"><i class="fa fa-tasks"></i>Entity Type</label>
     <select type="text" id="node-input-entity-type" style="width:70%">
-      <option value="batteries"> Batteries</option>
-      <option value="battery_charge_cycles"> BatteryChargeCycles</option> 
-      <option value="chores"> Chores</option> 
-      <option value="chores_log"> ChoresLog</option> 
-      <option value="equipment"> Equipment</option> 
-      <option value="locations"> Locations</option> 
-      <option value="meal_plan"> MealPlan</option> 
-      <option value="meal_plan_sections"> MealPlanSections</option> 
-      <option value="product_barcodes"> ProductBarcodes</option> 
-      <option value="product_groups"> ProductGroups</option> 
-      <option value="products"> Products</option> 
-      <option value="products_average_price"> ProductsAveragePrice</option> 
-      <option value="products_last_purchased"> ProductsLastPurchased</option> 
-      <option value="quantity_unit_conversions"> QuantityUnitConversions</option> 
-      <option value="quantity_unit_conversions_resolved"> QuantityUnitConversionsResolved</option> 
-      <option value="quantity_units"> QuantityUnits</option> 
-      <option value="recipes"> Recipes</option> 
-      <option value="recipes_nestings"> RecipesNestings</option> 
-      <option value="recipes_pos"> RecipesPos</option> 
-      <option value="recipes_pos_resolved"> RecipesPosResolved</option> 
-      <option value="shopping_list"> ShoppingList</option> 
-      <option value="shopping_lists"> ShoppingLists</option> 
-      <option value="shopping_locations"> ShoppingLocations</option> 
-      <option value="stock"> Stock</option>
-      <option value="stock_current_locations"> StockCurrentLocations</option> 
-      <option value="stock_log"> StockLog</option> 
-      <option value="task_categories"> TaskCategories</option> 
-      <option value="tasks"> Tasks</option> 
-      <option value="userentities"> Userentities</option> 
-      <option value="userfields"> Userfields</option> 
-      <option value="userobject"> Userobject</option>
+      <optgroup label="Inventory Management">
+        <option value="batteries">Batteries</option>
+        <option value="battery_charge_cycles">Battery Charge Cycles</option>
+        <option value="equipment">Equipment</option>
+        <option value="product_barcodes">Product Barcodes</option>
+        <option value="product_groups">Product Groups</option>
+        <option value="products">Products</option>
+        <option value="products_average_price">Products Average Price</option>
+        <option value="products_last_purchased">Products Last Purchased</option>
+        <option value="stock">Stock</option>
+        <option value="stock_current_locations">Stock Current Locations</option>
+        <option value="stock_log">Stock Log</option>
+      </optgroup>
+      <optgroup label="Meal and Recipe Management">
+        <option value="meal_plan">Meal Plan</option>
+        <option value="meal_plan_sections">Meal Plan Sections</option>
+        <option value="recipes">Recipes</option>
+        <option value="recipes_nestings">Recipes Nestings</option>
+        <option value="recipes_pos">RecipesPos</option>
+        <option value="recipes_pos_resolved">Recipes Pos Resolved</option>
+      </optgroup>
+      <optgroup label="Shopping and Location Management">
+        <option value="shopping_list">Shopping List</option>
+        <option value="shopping_lists">Shopping Lists</option>
+        <option value="shopping_locations">Shopping Locations</option>
+      </optgroup>
+      <optgroup label="Tasks and Chore Management">
+        <option value="chores">Chores</option>
+        <option value="chores_log">Chores Log</option>
+        <option value="task_categories">Task Categories</option>
+        <option value="tasks">Tasks</option>
+      </optgroup>
+      <optgroup label="Unit and Conversion Management">
+        <option value="quantity_unit_conversions">Quantity Unit Conversions</option>
+        <option value="quantity_unit_conversions_resolved">Quantity Unit Conversions Resolved</option>
+        <option value="quantity_units">Quantity Units</option>
+      </optgroup>
+      <optgroup label="User Customization and Management">
+        <option value="userentities">Userentities</option>
+        <option value="userfields">Userfields</option>
+        <option value="userobject">Userobject</option>
+      </optgroup>
     </select>
+    
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="icon-tag"></i> ID (optional)</label>

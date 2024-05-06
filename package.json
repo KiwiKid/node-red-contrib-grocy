@@ -1,7 +1,14 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.3.111",
+  "version": "0.3.112",
   "description": "A set of node-red nodes for calling the grocy api",
+  "keywords": [
+    "node-red",
+    "grocy",
+    "self-hosted",
+    "low-code",
+    ""
+  ],
   "scripts": {
     "add-node": "node ./utils/add-node.js",
     "copy": "copyfiles -u 2 \"./src/nodes/**/*.{png,svg}\" \"./dist/nodes/\"",
