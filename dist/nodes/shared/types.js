@@ -1,38 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EntityType = exports.getSpecificObject = void 0;
-/*
-export interface GrocyConfigNodeDef extends NodeDef {
-    url: string;
-    apiKey: string;
-}
-
-export type GrocyConfigNode = Node;
-
-
-*/
-const getSpecificObject = async (serverUrl, gKey, entity_type, id) => {
-    const url = `${serverUrl}/api/objects/${entity_type}/${id}`;
-    const headers = {
-        'GROCY-API-KEY': gKey,
-        'Accept': 'application/json'
-    };
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: headers
-        });
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return await response.json();
-    }
-    catch (error) {
-        console.error(`Failed to GET (${url}): \n\nerror:\n${error}`);
-        throw error; // Rethrow to ensure error handling is consistent with previous behavior
-    }
-};
-exports.getSpecificObject = getSpecificObject;
+exports.EntityType = void 0;
 var EntityType;
 (function (EntityType) {
     EntityType["Batteries"] = "batteries";

@@ -23,31 +23,37 @@ const nodeInit: NodeInitializer = (RED): void => {
 
     //console.warn('SET URL :'+ credentials.url)
     this.on('input', (msg, send, done) => {
+      if(!config.task_id || config.task_id == 0){
+        this.error('Failed due to missing task_id')
+        done()
+        return;
+      }
       const payload = msg.payload
 
-        const url = `${this.server.url}/api/tasks/${this.task_id}/${this.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
+        const url = `${this.server.url}/api/tasks/${config.task_id}/${config.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
         
         axios.post(url, payload, {
           headers: {
             'GROCY-API-KEY': this.server.gkey,
-            'Accept': 'application/json'
-          }
+            'Accept': 'application/json',
+            'Content-Type': 'application/json' 
+          },
         })
         .then(response => {
-          msg.payload = response.data; // Attach API response to the output message
+          msg.payload = response.data;
           send(msg);
           done();
         })
         .catch(error => {
-          this.error(`Failed to PUT task_id:"${this.task_id}" complete:${this.complete} (${url}): [server:${JSON.stringify(this.server)}] ` + error.message);
+          this.error(`Failed to post task_id:"${JSON.stringify(config)} (${url}): \n[error:${JSON.stringify(error)}]`);
           done();
         });
         done();
     });
 
-    this.on("close", (done: () => void) => { // Ensure 'done' is used if it's provided.
+    this.on("close", (done: () => void) => {
       console.log("Cleaning up resources...");
-      if (done) done(); // Call 'done' if there are async tasks.
+      if (done) done(); 
     });
   }
 

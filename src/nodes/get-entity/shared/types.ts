@@ -2,8 +2,6 @@
 export interface GetEntityOptions {
     entity_type: string
     server?: any
-    url?: string
-    key?: string
  }
 
  export enum GetEntityMethod {

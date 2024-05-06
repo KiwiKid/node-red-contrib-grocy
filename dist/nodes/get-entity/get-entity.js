@@ -3,12 +3,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 const axios_1 = __importDefault(require("axios"));
+const qs_1 = __importDefault(require("qs"));
 const nodeInit = (RED) => {
     function GetEntityNodeConstructor(config) {
         RED.nodes.createNode(this, config);
         this.server = RED.nodes.getNode(config.server);
         this.on('input', (msg, send, done) => {
-            const url = `${this.server.url}/api/objects/${config.entity_type}`;
+            if (msg.payload) {
+                Object.keys(msg === null || msg === void 0 ? void 0 : msg.payload).forEach((k) => {
+                    if (![
+                        'query',
+                        'order',
+                        'limit',
+                        'offset',
+                    ].includes((k))) {
+                        this.error(`${k} in payload is not supported`);
+                        done();
+                        return;
+                    }
+                });
+            }
+            const url = `${this.server.url}/api/objects/${config.entity_type}?${qs_1.default.stringify(msg.payload)}`;
             axios_1.default.get(url, {
                 headers: {
                     'GROCY-API-KEY': this.server.gkey,

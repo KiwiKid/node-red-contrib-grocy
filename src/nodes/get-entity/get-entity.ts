@@ -3,6 +3,7 @@ import { GetEntityNode, GetEntityNodeDef } from "./modules/types";
 import axios from 'axios'
 import { GetEntityOptions } from "./shared/types";
 import { GrocyConfigNode } from "../shared/types";
+import QueryString from "qs";
 
 declare const RED: EditorRED;
 
@@ -16,7 +17,21 @@ const nodeInit: NodeInitializer = (RED): void => {
     this.server = RED.nodes.getNode(config.server) as GrocyConfigNode
     
     this.on('input', (msg, send, done) => {
-      const url = `${this.server.url}/api/objects/${config.entity_type}`; 
+      if(msg.payload){
+        Object.keys(msg?.payload).forEach((k) => {
+          if(![
+            'query',
+            'order',
+            'limit',
+            'offset',
+          ].includes((k))){
+            this.error(`${k} in payload is not supported`)
+            done()
+            return;
+          }
+        })
+      }
+      const url = `${this.server.url}/api/objects/${config.entity_type}?${QueryString.stringify(msg.payload)}`; 
       axios.get(url, {
         headers: {
           'GROCY-API-KEY': this.server.gkey,

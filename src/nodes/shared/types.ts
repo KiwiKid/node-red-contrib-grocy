@@ -10,31 +10,6 @@ export type GrocyConfigNode = Node;
 
 
 */
-
-export const getSpecificObject = async (serverUrl:string, gKey: string, entity_type: EntityType, id: number): Promise<unknown> => {
-  const url = `${serverUrl}/api/objects/${entity_type}/${id}`;
-    const headers = {
-        'GROCY-API-KEY': gKey,
-        'Accept': 'application/json'
-    };
-
-    try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: headers
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        return await response.json();
-    } catch (error) {
-        console.error(`Failed to GET (${url}): \n\nerror:\n${error}`);
-        throw error; // Rethrow to ensure error handling is consistent with previous behavior
-    }
-}
-
 export interface GrocyConfig {
     url: string;
     gkey: string;

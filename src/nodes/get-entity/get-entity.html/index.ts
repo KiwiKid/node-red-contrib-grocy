@@ -17,9 +17,9 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   inputs: 1,
   outputs: 1,
   icon: "file.png",
-  paletteLabel: "get entity",
+  paletteLabel: "get generic entities",
   label: function () {
-    return `get grocy ${this.entity_type ? this.entity_type : 'none'}`;
+    return `get ${this.entity_type ? this.entity_type : 'none'} entities`;
   },
   oneditprepare: function () {
     $('#node-input-server').val(this.server)
