@@ -1,6 +1,131 @@
 <script type="text/javascript">
-(function () {
+(function (axios) {
     'use strict';
+
+    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+
+    var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
+
+    /******************************************************************************
+    Copyright (c) Microsoft Corporation.
+
+    Permission to use, copy, modify, and/or distribute this software for any
+    purpose with or without fee is hereby granted.
+
+    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+    REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+    AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+    INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+    LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+    OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+    PERFORMANCE OF THIS SOFTWARE.
+    ***************************************************************************** */
+
+    function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+        return new (P || (P = Promise))(function (resolve, reject) {
+            function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+            function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+            function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+            step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+    }
+
+    function __generator(thisArg, body) {
+        var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+        return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+        function verb(n) { return function (v) { return step([n, v]); }; }
+        function step(op) {
+            if (f) throw new TypeError("Generator is already executing.");
+            while (g && (g = 0, op[0] && (_ = 0)), _) try {
+                if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+                if (y = 0, t) op = [op[0] & 2, t.value];
+                switch (op[0]) {
+                    case 0: case 1: t = op; break;
+                    case 4: _.label++; return { value: op[1], done: false };
+                    case 5: _.label++; y = op[1]; op = [0]; continue;
+                    case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                    default:
+                        if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                        if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                        if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                        if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                        if (t[2]) _.ops.pop();
+                        _.trys.pop(); continue;
+                }
+                op = body.call(thisArg, _);
+            } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+            if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        }
+    }
+
+    typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+        var e = new Error(message);
+        return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+    };
+
+    /*
+    export interface GrocyConfigNodeDef extends NodeDef {
+        url: string;
+        apiKey: string;
+    }
+
+    export type GrocyConfigNode = Node;
+
+
+    */
+    var getSpecificObject = function (serverUrl, gKey, entity_type, id) { return __awaiter(void 0, void 0, void 0, function () {
+        var url;
+        return __generator(this, function (_a) {
+            url = "".concat(serverUrl, "/api/objects/").concat(entity_type, "/").concat(id);
+            return [2 /*return*/, axios__default["default"].get(url, {
+                    headers: {
+                        'GROCY-API-KEY': gKey,
+                        'Accept': 'application/json'
+                    }
+                })
+                    .then(function (response) {
+                    return response.data; // Attach API response to the output message
+                })
+                    .catch(function (error) {
+                    console.error("Failed to GET (".concat(url, "):  \n\nerror:\n").concat(JSON.stringify(error, null, 4)));
+                })];
+        });
+    }); };
+    var EntityType;
+    (function (EntityType) {
+        EntityType["Batteries"] = "batteries";
+        EntityType["BatteryChargeCycles"] = "battery_charge_cycles";
+        EntityType["Chores"] = "chores";
+        EntityType["ChoresLog"] = "chores_log";
+        EntityType["Equipment"] = "equipment";
+        EntityType["Locations"] = "locations";
+        EntityType["MealPlan"] = "meal_plan";
+        EntityType["MealPlanSections"] = "meal_plan_sections";
+        EntityType["ProductBarcodes"] = "product_barcodes";
+        EntityType["ProductGroups"] = "product_groups";
+        EntityType["Products"] = "products";
+        EntityType["ProductsAveragePrice"] = "products_average_price";
+        EntityType["ProductsLastPurchased"] = "products_last_purchased";
+        EntityType["QuantityUnitConversions"] = "quantity_unit_conversions";
+        EntityType["QuantityUnitConversionsResolved"] = "quantity_unit_conversions_resolved";
+        EntityType["QuantityUnits"] = "quantity_units";
+        EntityType["Recipes"] = "recipes";
+        EntityType["RecipesNestings"] = "recipes_nestings";
+        EntityType["RecipesPos"] = "recipes_pos";
+        EntityType["RecipesPosResolved"] = "recipes_pos_resolved";
+        EntityType["ShoppingList"] = "shopping_list";
+        EntityType["ShoppingLists"] = "shopping_lists";
+        EntityType["ShoppingLocations"] = "shopping_locations";
+        EntityType["Stock"] = "stock";
+        EntityType["StockCurrentLocations"] = "stock_current_locations";
+        EntityType["StockLog"] = "stock_log";
+        EntityType["TaskCategories"] = "task_categories";
+        EntityType["Tasks"] = "tasks";
+        EntityType["Userentities"] = "userentities";
+        EntityType["Userfields"] = "userfields";
+        EntityType["Userobject"] = "userobject";
+    })(EntityType || (EntityType = {}));
 
     RED.nodes.registerType("complete-chore", {
         category: "grocy",
@@ -19,6 +144,19 @@
             return "complete chore #".concat(this.chore_id);
         },
         oneditprepare: function () {
+            var _a, _b;
+            if (this.chore_id > 0) {
+                getSpecificObject((_a = this.server) === null || _a === void 0 ? void 0 : _a.url, (_b = this.server) === null || _b === void 0 ? void 0 : _b.gkey, EntityType.Chores, this.chore_id)
+                    .then(function (obj) {
+                    // Display the result in a <pre> block
+                    var pre = $('<pre>').text(JSON.stringify(obj, null, 2));
+                    $('#node-input-chore-id').after(pre);
+                })
+                    .catch(function (error) {
+                    console.error('Error fetching chore data:', error);
+                });
+                $('#node-input-chore-id');
+            }
             $('#node-input-chore-id').val(this.chore_id);
             $('#node-input-complete').val(this.complete ? "true" : "false");
         },
@@ -36,7 +174,7 @@
         }
     });
 
-})();
+})(axios);
 </script>
 <script type="text/html" data-template-name="complete-chore">
   <div class="form-row">

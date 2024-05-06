@@ -1,4 +1,5 @@
 import { Node } from "node-red";
+import axios from 'axios'
 /*
 export interface GrocyConfigNodeDef extends NodeDef {
     url: string;
@@ -9,6 +10,22 @@ export type GrocyConfigNode = Node;
 
 
 */
+
+export const getSpecificObject = async (serverUrl:string, gKey: string, entity_type: EntityType, id: number): Promise<unknown> => {
+    const url = `${serverUrl}/api/objects/${entity_type}/${id}`;
+    return axios.get(url, {
+        headers: {
+          'GROCY-API-KEY': gKey,
+          'Accept': 'application/json'
+        }
+      })
+      .then(response => {
+        return response.data; // Attach API response to the output message
+      })
+      .catch(error => {
+        console.error(`Failed to GET (${url}):  \n\nerror:\n${JSON.stringify(error, null, 4)}`);
+      });
+}
 
 export interface GrocyConfig {
     url: string;

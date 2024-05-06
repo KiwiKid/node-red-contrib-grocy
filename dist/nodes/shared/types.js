@@ -1,6 +1,36 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.EntityType = void 0;
+exports.EntityType = exports.getSpecificObject = void 0;
+const axios_1 = __importDefault(require("axios"));
+/*
+export interface GrocyConfigNodeDef extends NodeDef {
+    url: string;
+    apiKey: string;
+}
+
+export type GrocyConfigNode = Node;
+
+
+*/
+const getSpecificObject = async (serverUrl, gKey, entity_type, id) => {
+    const url = `${serverUrl}/api/objects/${entity_type}/${id}`;
+    return axios_1.default.get(url, {
+        headers: {
+            'GROCY-API-KEY': gKey,
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => {
+        return response.data; // Attach API response to the output message
+    })
+        .catch(error => {
+        console.error(`Failed to GET (${url}):  \n\nerror:\n${JSON.stringify(error, null, 4)}`);
+    });
+};
+exports.getSpecificObject = getSpecificObject;
 var EntityType;
 (function (EntityType) {
     EntityType["Batteries"] = "batteries";
