@@ -1,6 +1,6 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.3.107",
+  "version": "0.3.108",
   "description": "[🚧 alpha-testing 🚧] Set of node-red nodes for calling the grocy api",
   "scripts": {
     "add-node": "node ./utils/add-node.js",
@@ -25,7 +25,8 @@
       "get-entity": "./dist/nodes/get-entity/get-entity.js",
       "complete-task": "./dist/nodes/complete-task/complete-task.js",
       "complete-chore": "./dist/nodes/complete-chore/complete-chore.js",
-      "grocy-config": "./dist/nodes/grocy-config/grocy-config.js"
+      "grocy-config": "./dist/nodes/grocy-config/grocy-config.js",
+      "edit-entity": "./dist/nodes/edit-entity/edit-entity.js"
     }
   },
   "dependencies": {},
