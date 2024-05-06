@@ -1,10 +1,27 @@
 <script type="text/javascript">
-(function (axios) {
+(function (http, https) {
     'use strict';
 
-    function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
+    function _interopNamespace(e) {
+        if (e && e.__esModule) return e;
+        var n = Object.create(null);
+        if (e) {
+            Object.keys(e).forEach(function (k) {
+                if (k !== 'default') {
+                    var d = Object.getOwnPropertyDescriptor(e, k);
+                    Object.defineProperty(n, k, d.get ? d : {
+                        enumerable: true,
+                        get: function () { return e[k]; }
+                    });
+                }
+            });
+        }
+        n["default"] = e;
+        return Object.freeze(n);
+    }
 
-    var axios__default = /*#__PURE__*/_interopDefaultLegacy(axios);
+    var http__namespace = /*#__PURE__*/_interopNamespace(http);
+    var https__namespace = /*#__PURE__*/_interopNamespace(https);
 
     /******************************************************************************
     Copyright (c) Microsoft Corporation.
@@ -75,20 +92,31 @@
 
     */
     var getSpecificObject = function (serverUrl, gKey, entity_type, id) { return __awaiter(void 0, void 0, void 0, function () {
-        var url;
+        var url, protocol;
         return __generator(this, function (_a) {
-            url = "".concat(serverUrl, "/api/objects/").concat(entity_type, "/").concat(id);
-            return [2 /*return*/, axios__default["default"].get(url, {
-                    headers: {
-                        'GROCY-API-KEY': gKey,
-                        'Accept': 'application/json'
-                    }
-                })
-                    .then(function (response) {
-                    return response.data; // Attach API response to the output message
-                })
-                    .catch(function (error) {
-                    console.error("Failed to GET (".concat(url, "):  \n\nerror:\n").concat(JSON.stringify(error, null, 4)));
+            url = new URL("".concat(serverUrl, "/api/objects/").concat(entity_type, "/").concat(id));
+            protocol = url.protocol === 'https:' ? https__namespace : http__namespace;
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    var options = {
+                        headers: {
+                            'GROCY-API-KEY': gKey,
+                            'Accept': 'application/json'
+                        }
+                    };
+                    var req = protocol.get(url, options, function (res) {
+                        var data = '';
+                        res.on('data', function (chunk) {
+                            data += chunk;
+                        });
+                        res.on('end', function () {
+                            resolve(JSON.parse(data));
+                        });
+                    });
+                    req.on('error', function (error) {
+                        console.error("Failed to GET (".concat(url.href, "):  \n\nerror:\n").concat(JSON.stringify(error, null, 4)));
+                        reject(error);
+                    });
+                    req.end();
                 })];
         });
     }); };
@@ -155,7 +183,6 @@
                     .catch(function (error) {
                     console.error('Error fetching chore data:', error);
                 });
-                $('#node-input-chore-id');
             }
             $('#node-input-chore-id').val(this.chore_id);
             $('#node-input-complete').val(this.complete ? "true" : "false");
@@ -174,7 +201,7 @@
         }
     });
 
-})(axios);
+})(http, https);
 </script>
 <script type="text/html" data-template-name="complete-chore">
   <div class="form-row">

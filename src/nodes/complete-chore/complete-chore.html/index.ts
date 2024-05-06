@@ -32,7 +32,6 @@ RED.nodes.registerType<CompleteChoreEditorNodeProperties>("complete-chore", {
       .catch(error => {
         console.error('Error fetching chore data:', error);
       });
-      $('#node-input-chore-id')
     }
     $('#node-input-chore-id').val(this.chore_id);
     $('#node-input-complete').val(this.complete ? "true" : "false");

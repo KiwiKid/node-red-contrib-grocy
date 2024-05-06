@@ -1,10 +1,31 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EntityType = exports.getSpecificObject = void 0;
-const axios_1 = __importDefault(require("axios"));
+const http = __importStar(require("http"));
+const https = __importStar(require("https"));
 /*
 export interface GrocyConfigNodeDef extends NodeDef {
     url: string;
@@ -16,18 +37,29 @@ export type GrocyConfigNode = Node;
 
 */
 const getSpecificObject = async (serverUrl, gKey, entity_type, id) => {
-    const url = `${serverUrl}/api/objects/${entity_type}/${id}`;
-    return axios_1.default.get(url, {
-        headers: {
-            'GROCY-API-KEY': gKey,
-            'Accept': 'application/json'
-        }
-    })
-        .then(response => {
-        return response.data; // Attach API response to the output message
-    })
-        .catch(error => {
-        console.error(`Failed to GET (${url}):  \n\nerror:\n${JSON.stringify(error, null, 4)}`);
+    const url = new URL(`${serverUrl}/api/objects/${entity_type}/${id}`);
+    const protocol = url.protocol === 'https:' ? https : http;
+    return new Promise((resolve, reject) => {
+        const options = {
+            headers: {
+                'GROCY-API-KEY': gKey,
+                'Accept': 'application/json'
+            }
+        };
+        const req = protocol.get(url, options, (res) => {
+            let data = '';
+            res.on('data', (chunk) => {
+                data += chunk;
+            });
+            res.on('end', () => {
+                resolve(JSON.parse(data));
+            });
+        });
+        req.on('error', (error) => {
+            console.error(`Failed to GET (${url.href}):  \n\nerror:\n${JSON.stringify(error, null, 4)}`);
+            reject(error);
+        });
+        req.end();
     });
 };
 exports.getSpecificObject = getSpecificObject;

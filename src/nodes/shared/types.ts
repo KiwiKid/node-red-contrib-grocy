@@ -1,5 +1,7 @@
 import { Node } from "node-red";
-import axios from 'axios'
+import * as http from 'http';
+import * as https from 'https';
+
 /*
 export interface GrocyConfigNodeDef extends NodeDef {
     url: string;
@@ -12,19 +14,35 @@ export type GrocyConfigNode = Node;
 */
 
 export const getSpecificObject = async (serverUrl:string, gKey: string, entity_type: EntityType, id: number): Promise<unknown> => {
-    const url = `${serverUrl}/api/objects/${entity_type}/${id}`;
-    return axios.get(url, {
-        headers: {
-          'GROCY-API-KEY': gKey,
-          'Accept': 'application/json'
-        }
-      })
-      .then(response => {
-        return response.data; // Attach API response to the output message
-      })
-      .catch(error => {
-        console.error(`Failed to GET (${url}):  \n\nerror:\n${JSON.stringify(error, null, 4)}`);
+  const url = new URL(`${serverUrl}/api/objects/${entity_type}/${id}`);
+    const protocol = url.protocol === 'https:' ? https : http;
+
+    
+  return new Promise((resolve, reject) => {
+      const options = {
+          headers: {
+              'GROCY-API-KEY': gKey,
+              'Accept': 'application/json'
+          }
+      };
+
+      const req = protocol.get(url, options, (res) => {
+          let data = '';
+          res.on('data', (chunk) => {
+              data += chunk;
+          });
+          res.on('end', () => {
+              resolve(JSON.parse(data));
+          });
       });
+
+      req.on('error', (error) => {
+          console.error(`Failed to GET (${url.href}):  \n\nerror:\n${JSON.stringify(error, null, 4)}`);
+          reject(error);
+      });
+
+      req.end();
+  });
 }
 
 export interface GrocyConfig {
