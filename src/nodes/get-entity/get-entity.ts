@@ -13,7 +13,7 @@ const nodeInit: NodeInitializer = (RED): void => {
     config: GetEntityNodeDef
   ): void {
     RED.nodes.createNode(this, config);
-
+    RED.log.info(`Set Grocy (config:${JSON.stringify(config)})`)
     this.server = RED.nodes.getNode(config.server) as GrocyConfigNode
     
     this.on('input', (msg, send, done) => {
@@ -31,7 +31,7 @@ const nodeInit: NodeInitializer = (RED): void => {
           }
         })
       }
-      const url = `${this.server.url}/api/objects/${config.entity_type}${config.entity_id ? `/${config.entity_id}` : ''}?${QueryString.stringify(msg.payload)}`; 
+      const url = `${this.server.url}/api/objects/${this.entity_type}${config.entity_id ? `/${config.entity_id}` : ''}?${QueryString.stringify(msg.payload)}`; 
       axios.get(url, {
         headers: {
           'GROCY-API-KEY': this.server.gkey,
@@ -39,7 +39,10 @@ const nodeInit: NodeInitializer = (RED): void => {
         }
       })
       .then(response => {
-        msg.payload = response.data;
+        msg.payload = {
+          data: response.data,
+          config: config,
+        }
         send(msg);
         done();
       })

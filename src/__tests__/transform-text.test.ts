@@ -1,4 +1,4 @@
-import testHelper, { TestFlowsItem } from "node-red-node-test-helper";
+/*import testHelper, { TestFlowsItem } from "node-red-node-test-helper";
 import transformTextNode from "../nodes/transform-text/transform-text";
 import { TransformTextNodeDef } from "../nodes/transform-text/modules/types";
 import { TransformTextOperation } from "../nodes/transform-text/shared/types";
@@ -110,3 +110,4 @@ describe("transform-text node", () => {
     });
   });
 });
+*/

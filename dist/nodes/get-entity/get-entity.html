@@ -64,12 +64,12 @@
             var server = (_b = (_a = $('#node-input-server').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
             var et = (_d = (_c = $('#node-input-entity-type').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
             var etId = (_f = (_e = $('#node-input-entity-id').val()) === null || _e === void 0 ? void 0 : _e.toString()) !== null && _f !== void 0 ? _f : '';
-            // Set values globally using RED.settings
+            //const enumType = EntityType[et as keyof typeof EntityType];
             this.server = server;
             this.entity_type = et;
             this.entity_id = etId;
             // Notify user about the settings
-            RED.notify("Set Grocy (".concat(this.entity_type, ") URL: ").concat(server));
+            RED.notify("Set Grocy (".concat(this.entity_type, ") [").concat(et, "] [[").concat($('#node-input-entity-type').val(), "]] URL: ").concat(server));
         }
     });
 

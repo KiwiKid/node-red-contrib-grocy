@@ -32,13 +32,13 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
     const server = $('#node-input-server').val()?.toString() ?? '';
     const et = $('#node-input-entity-type').val()?.toString() ?? '';
     const etId = $('#node-input-entity-id').val()?.toString() ?? '';
+    //const enumType = EntityType[et as keyof typeof EntityType];
 
-    // Set values globally using RED.settings
-    this.server = server
-    this.entity_type = et
+    this.server = server;
+    this.entity_type = et as EntityType;
     this.entity_id = etId
 
     // Notify user about the settings
-    RED.notify(`Set Grocy (${this.entity_type}) URL: ${server}`);
+    RED.notify(`Set Grocy (${this.entity_type}) [${et}] [[${$('#node-input-entity-type').val()}]] URL: ${server}`);
  }
 });

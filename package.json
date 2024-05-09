@@ -1,7 +1,8 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.3.113",
+  "version": "0.3.120",
   "description": "A set of node-red nodes for calling the grocy api",
+  "license": "Apache-2.0",
   "keywords": [
     "node-red",
     "grocy",
@@ -26,15 +27,15 @@
     "lint": "prettier --ignore-path .eslintignore --check '**/*.{js,ts,md}'; eslint --ext .js,.ts .",
     "lint:fix": "prettier --ignore-path .eslintignore --write '**/*.{js,ts,md}'; eslint --ext .js,.ts . --fix"
   },
-  "author": "Alex Kaul",
-  "license": "MIT",
+  "author": "Greg C.",
   "node-red": {
     "nodes": {
       "get-entity": "./dist/nodes/get-entity/get-entity.js",
       "complete-task": "./dist/nodes/complete-task/complete-task.js",
       "complete-chore": "./dist/nodes/complete-chore/complete-chore.js",
       "grocy-config": "./dist/nodes/grocy-config/grocy-config.js",
-      "edit-entity": "./dist/nodes/edit-entity/edit-entity.js"
+      "edit-entity": "./dist/nodes/edit-entity/edit-entity.js",
+      "add-entity": "./dist/nodes/add-entity/add-entity.js"
     }
   },
   "dependencies": {},

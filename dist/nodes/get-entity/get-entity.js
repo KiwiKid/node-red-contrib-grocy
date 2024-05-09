@@ -7,6 +7,7 @@ const qs_1 = __importDefault(require("qs"));
 const nodeInit = (RED) => {
     function GetEntityNodeConstructor(config) {
         RED.nodes.createNode(this, config);
+        RED.log.info(`Set Grocy (config:${JSON.stringify(config)})`);
         this.server = RED.nodes.getNode(config.server);
         this.on('input', (msg, send, done) => {
             if (msg.payload) {
@@ -23,7 +24,7 @@ const nodeInit = (RED) => {
                     }
                 });
             }
-            const url = `${this.server.url}/api/objects/${config.entity_type}${config.entity_id ? `/${config.entity_id}` : ''}?${qs_1.default.stringify(msg.payload)}`;
+            const url = `${this.server.url}/api/objects/${this.entity_type}${config.entity_id ? `/${config.entity_id}` : ''}?${qs_1.default.stringify(msg.payload)}`;
             axios_1.default.get(url, {
                 headers: {
                     'GROCY-API-KEY': this.server.gkey,
@@ -31,7 +32,10 @@ const nodeInit = (RED) => {
                 }
             })
                 .then(response => {
-                msg.payload = response.data;
+                msg.payload = {
+                    data: response.data,
+                    config: config,
+                };
                 send(msg);
                 done();
             })
