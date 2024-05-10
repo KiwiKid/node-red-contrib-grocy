@@ -15,11 +15,6 @@ const nodeInit = (RED) => {
         // eslint-disable-next-line @typescript-eslint/no-this-alias
         const node = this;
         node.on('input', (msg, send, done) => {
-            node.log('get-entity');
-            node.log('payload');
-            node.log(JSON.stringify(msg.payload));
-            node.log('config');
-            node.log(JSON.stringify(config, null, 4));
             if (msg.payload) {
                 Object.keys(msg === null || msg === void 0 ? void 0 : msg.payload).forEach((k) => {
                     if (![
@@ -30,13 +25,14 @@ const nodeInit = (RED) => {
                     ].includes((k))) {
                         node.log(`${k} in payload is not supported`);
                         this.error(`${k} in payload is not supported`);
-                        done();
+                        if (done) {
+                            done();
+                        }
                         return;
                     }
                 });
             }
             const url = `${node.server.url}/api/objects/${node.entity_type}${node.entity_id ? `/${node.entity_id}` : ''}?${qs_1.default.stringify(msg.payload)}`;
-            node.log(`get-url: ${url}`);
             axios_1.default.get(url, {
                 headers: {
                     'GROCY-API-KEY': node.server.gkey,
@@ -44,21 +40,20 @@ const nodeInit = (RED) => {
                 }
             })
                 .then(response => {
-                msg.payload = {
-                    data: response.data,
-                    config: config,
-                    node: node,
-                };
-                send(msg);
-                done();
+                msg.payload = response.data,
+                    send(msg);
+                if (done) {
+                    done();
+                }
             })
                 .catch(error => {
                 this.error(`Failed to post task_id:(${url}) \n\n===payload===\n:${JSON.stringify(msg.payload, null, 4)}) \n\n====config====\n:${JSON.stringify(config, null, 4)}: \n\n===error===:\n${JSON.stringify(error, null, 4)}] \n\n====this:==== \n${JSON.stringify(this)}`);
-                done();
+                if (done) {
+                    done();
+                }
             });
         });
         this.on("close", (done) => {
-            console.log("Cleaning up resources...");
             if (done)
                 done(); // Call 'done' if there are async tasks.
         });
