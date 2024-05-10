@@ -23,14 +23,14 @@ const nodeInit: NodeInitializer = (RED): void => {
 
     //console.warn('SET URL :'+ credentials.url)
     this.on('input', (msg, send, done) => {
-      if(!config.task_id || config.task_id == 0){
+      if(!this.task_id || this.task_id == 0){
         this.error('Failed due to missing task_id')
         done()
         return;
       }
       const payload = msg.payload
 
-        const url = `${this.server.url}/api/tasks/${config.task_id}/${config.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
+        const url = `${this.server.url}/api/tasks/${this.task_id}/${config.complete ? 'complete' : 'undo'}`; // Adjust if your Grocy API endpoint differs
         
         axios.post(url, payload, {
           headers: {

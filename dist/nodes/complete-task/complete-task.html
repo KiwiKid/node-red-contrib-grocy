@@ -1,41 +1,42 @@
 <script type="text/javascript">
 (function () {
-   'use strict';
+    'use strict';
 
-   RED.nodes.registerType("complete-task", {
-       category: "grocy",
-       color: "#a6bbcf",
-       defaults: {
-           name: { value: "" },
-           server: { value: "", type: "grocy-config" },
-           complete: { value: true },
-           task_id: { value: "" }
-       },
-       inputs: 1,
-       outputs: 1,
-       icon: "file.png",
-       paletteLabel: "complete task",
-       label: function () {
-           return "".concat(this.complete ? 'compelete' : 'undo', " grocy task #").concat(this.task_id);
-       },
-       /* oneditprepare: function () {
-          $('#node-input-task-id').val(this.task_id);
-          $('#node-input-complete').val(this.complete ? "true" : "false");
-      
+    RED.nodes.registerType("complete-task", {
+        category: "grocy",
+        color: "#a6bbcf",
+        defaults: {
+            name: { value: "" },
+            server: { value: "", type: "grocy-config" },
+            complete: { value: true },
+            task_id: { value: "" }
         },
-       /* oneditsave: function () {
-          // Access the flow context
-          const server = $('#node-input-server').val()?.toString() ?? '';
-          const task_id = $('#node-input-task-id').val()?.toString() ?? '';
-          const complete = $('#node-input-complete').val()?.toString() ?? '';
-      
-          // Set values globally using RED.settings
-          //this.server = server
-          this.task_id = +task_id;
-          this.complete = complete == "true"
-          // Notify user about the settings
-       }*/
-   });
+        inputs: 1,
+        outputs: 1,
+        icon: "file.png",
+        paletteLabel: "complete task",
+        label: function () {
+            return "".concat(this.complete ? 'compelete' : 'undo', " grocy task #").concat(this.task_id);
+        },
+        oneditprepare: function () {
+            var _a, _b;
+            $('#node-input-task-id').val(this.task_id);
+            $('#node-input-complete').val(this.complete ? "true" : "false");
+            (_b = (_a = $('#node-input-server').val(this.server)) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+        },
+        oneditsave: function () {
+            var _a, _b, _c, _d, _e, _f;
+            // Access the flow context
+            var server = (_b = (_a = $('#node-input-server').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+            var task_id = (_d = (_c = $('#node-input-task-id').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            var complete = (_f = (_e = $('#node-input-complete').val()) === null || _e === void 0 ? void 0 : _e.toString()) !== null && _f !== void 0 ? _f : '';
+            // Set values globally using RED.settings
+            this.server = server;
+            this.task_id = +task_id;
+            this.complete = complete == "true";
+            // Notify user about the settings
+        }
+    });
 
 })();
 </script>
