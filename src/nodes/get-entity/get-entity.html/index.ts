@@ -11,7 +11,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   color: "#a6bbcf",
   defaults: {
     name: { value: "" },
-    entity_type: { value: EntityType.Tasks },
+    entity_type: { value: "" },
     entity_id: { value: ""},
     server: { value:"", type: "grocy-config" },
   },
@@ -26,6 +26,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
     $('#node-input-server').val(this.server)
     $('#node-input-entity-type').val(this.entity_type);
     $('#node-input-entity-id').val(this.entity_id ? this.entity_id : '');
+    console.log('Edit prepare:', this.entity_type);
   },
   oneditsave: function () {
     // Access the flow context
@@ -35,7 +36,7 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
     //const enumType = EntityType[et as keyof typeof EntityType];
 
     this.server = server;
-    this.entity_type = et as EntityType;
+    this.entity_type = et ;
     this.entity_id = etId
 
     // Notify user about the settings

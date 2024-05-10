@@ -1,40 +1,41 @@
 <script type="text/javascript">
 (function () {
-    'use strict';
+   'use strict';
 
-    RED.nodes.registerType("complete-task", {
-        category: "grocy",
-        color: "#a6bbcf",
-        defaults: {
-            name: { value: "" },
-            server: { value: "", type: "grocy-config" },
-            complete: { value: true },
-            task_id: { value: "" }
+   RED.nodes.registerType("complete-task", {
+       category: "grocy",
+       color: "#a6bbcf",
+       defaults: {
+           name: { value: "" },
+           server: { value: "", type: "grocy-config" },
+           complete: { value: true },
+           task_id: { value: "" }
+       },
+       inputs: 1,
+       outputs: 1,
+       icon: "file.png",
+       paletteLabel: "complete task",
+       label: function () {
+           return "".concat(this.complete ? 'compelete' : 'undo', " grocy task #").concat(this.task_id);
+       },
+       /* oneditprepare: function () {
+          $('#node-input-task-id').val(this.task_id);
+          $('#node-input-complete').val(this.complete ? "true" : "false");
+      
         },
-        inputs: 1,
-        outputs: 1,
-        icon: "file.png",
-        paletteLabel: "complete task",
-        label: function () {
-            return "".concat(this.complete ? 'compelete' : 'undo', " grocy task #").concat(this.task_id);
-        },
-        oneditprepare: function () {
-            $('#node-input-task-id').val(this.task_id);
-            $('#node-input-complete').val(this.complete ? "true" : "false");
-        },
-        oneditsave: function () {
-            var _a, _b, _c, _d;
-            // Access the flow context
-            // const server = $('#node-input-server').val()?.toString() ?? '';
-            var task_id = (_b = (_a = $('#node-input-task-id').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
-            var complete = (_d = (_c = $('#node-input-complete').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
-            // Set values globally using RED.settings
-            //this.server = server
-            this.task_id = +task_id;
-            this.complete = complete == "true";
-            // Notify user about the settings
-        }
-    });
+       /* oneditsave: function () {
+          // Access the flow context
+          const server = $('#node-input-server').val()?.toString() ?? '';
+          const task_id = $('#node-input-task-id').val()?.toString() ?? '';
+          const complete = $('#node-input-complete').val()?.toString() ?? '';
+      
+          // Set values globally using RED.settings
+          //this.server = server
+          this.task_id = +task_id;
+          this.complete = complete == "true"
+          // Notify user about the settings
+       }*/
+   });
 
 })();
 </script>
