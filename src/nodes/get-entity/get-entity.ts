@@ -15,8 +15,17 @@ const nodeInit: NodeInitializer = (RED): void => {
     RED.nodes.createNode(this, config);
     RED.log.info(`Set Grocy (config:${JSON.stringify(config)})`)
     this.server = RED.nodes.getNode(config.server) as GrocyConfigNode
-    
-    this.on('input', (msg, send, done) => {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    this.entity_type = config.entity_type;
+    this.entity_id = config.entity_id;
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const node = this;
+    node.on('input', (msg, send, done) => {
+      node.log('get-entity')
+      node.log('payload')
+      node.log(JSON.stringify(msg.payload))
+      node.log('config')
+      node.log(JSON.stringify(config, null, 4))
       if(msg.payload){
         Object.keys(msg?.payload).forEach((k) => {
           if(![
@@ -25,16 +34,18 @@ const nodeInit: NodeInitializer = (RED): void => {
             'limit',
             'offset',
           ].includes((k))){
+            node.log(`${k} in payload is not supported`)
             this.error(`${k} in payload is not supported`)
             done()
             return;
           }
         })
       }
-      const url = `${this.server.url}/api/objects/${this.entity_type}${config.entity_id ? `/${config.entity_id}` : ''}?${QueryString.stringify(msg.payload)}`; 
+      const url = `${node.server.url}/api/objects/${node.entity_type}${node.entity_id ? `/${node.entity_id}` : ''}?${QueryString.stringify(msg.payload)}`; 
+      node.log(`get-url: ${url}`)
       axios.get(url, {
         headers: {
-          'GROCY-API-KEY': this.server.gkey,
+          'GROCY-API-KEY': node.server.gkey,
           'Accept': 'application/json'
         }
       })
@@ -42,13 +53,13 @@ const nodeInit: NodeInitializer = (RED): void => {
         msg.payload = {
           data: response.data,
           config: config,
-          thisCon: this
+          node: node,
         }
         send(msg);
         done();
       })
       .catch(error => {
-        this.error(`Failed to post task_id:(${url}) \n\n(payload:${JSON.stringify(msg.payload, null, 4)}) \n\nconfig:${JSON.stringify(config, null, 4)}: \n\n[error:${JSON.stringify(error, null, 4)}]`);
+        this.error(`Failed to post task_id:(${url}) \n\n===payload===\n:${JSON.stringify(msg.payload, null, 4)}) \n\n====config====\n:${JSON.stringify(config, null, 4)}: \n\n===error===:\n${JSON.stringify(error, null, 4)}] \n\n====this:==== \n${JSON.stringify(this)}`);
         done();
       });
 

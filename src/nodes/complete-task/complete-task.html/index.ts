@@ -10,7 +10,7 @@ RED.nodes.registerType<CompleteTaskEditorNodeProperties>("complete-task", {
   defaults: {
     name: { value: "" },
     server: { value:"", type: "grocy-config" },
-    complete: { value: true },
+    complete: { value: "true" },
     task_id: { value: "" }
   },
   inputs: 1,
@@ -18,7 +18,7 @@ RED.nodes.registerType<CompleteTaskEditorNodeProperties>("complete-task", {
   icon: "file.png",
   paletteLabel: "complete task",
   label: function () {
-    return `${this.complete ? 'compelete' : 'undo'} grocy task #${this.task_id}`;
+    return `${this.complete ? 'do' : 'undo'} task #${this.task_id}`;
   },
   oneditprepare: function () {
     $('#node-input-task-id').val(this.task_id);
@@ -35,7 +35,7 @@ RED.nodes.registerType<CompleteTaskEditorNodeProperties>("complete-task", {
     // Set values globally using RED.settings
     this.server = server
     this.task_id = +task_id;
-    this.complete = complete == "true"
+    this.complete = complete
     // Notify user about the settings
  }
 });

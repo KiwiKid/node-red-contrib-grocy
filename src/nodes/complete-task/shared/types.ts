@@ -1,5 +1,5 @@
 export interface CompleteTaskOptions {
     server?: any
-    complete: boolean
+    complete: string
     task_id: number
  }

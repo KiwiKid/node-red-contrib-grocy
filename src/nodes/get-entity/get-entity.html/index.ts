@@ -10,9 +10,9 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
   category: "grocy",
   color: "#a6bbcf",
   defaults: {
-    name: { value: "" },
-    entity_type: { value: "" },
-    entity_id: { value: ""},
+    name: { value: "", type: "text" },
+    entity_type: { value: "", type: "text" },
+    entity_id: { value: "", type: "text"},
     server: { value:"", type: "grocy-config" },
   },
   inputs: 1,
@@ -26,7 +26,6 @@ RED.nodes.registerType<GetEntityEditorNodeProperties>("get-entity", {
     $('#node-input-server').val(this.server)
     $('#node-input-entity-type').val(this.entity_type);
     $('#node-input-entity-id').val(this.entity_id ? this.entity_id : '');
-    console.log('Edit prepare:', this.entity_type);
   },
   oneditsave: function () {
     // Access the flow context

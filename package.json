@@ -1,6 +1,6 @@
 {
   "name": "@kiwikid/node-red-contrib-grocy",
-  "version": "0.3.126",
+  "version": "0.3.142",
   "description": "A set of node-red nodes for calling the grocy api",
   "license": "Apache-2.0",
   "keywords": [

@@ -9,7 +9,7 @@
             name: { value: "" },
             server: { value: "", type: "grocy-config" },
             chore_id: { value: "" },
-            //complete: { value: true },
+            complete: { value: "" },
         },
         inputs: 1,
         outputs: 1,
@@ -23,15 +23,15 @@
             // $('#node-input-complete').val(this.complete ? "true" : "false");
         },
         oneditsave: function () {
-            var _a, _b;
+            var _a, _b, _c, _d, _e, _f;
             // Access the flow context
-            // const server = $('#node-input-server').val()?.toString() ?? '';
-            var chore_id = (_b = (_a = $('#node-input-chore-id').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
-            //  const complete = $('#node-input-complete').val()?.toString() ?? '';
+            var server = (_b = (_a = $('#node-input-server').val()) === null || _a === void 0 ? void 0 : _a.toString()) !== null && _b !== void 0 ? _b : '';
+            var chore_id = (_d = (_c = $('#node-input-chore-id').val()) === null || _c === void 0 ? void 0 : _c.toString()) !== null && _d !== void 0 ? _d : '';
+            var complete = (_f = (_e = $('#node-input-complete').val()) === null || _e === void 0 ? void 0 : _e.toString()) !== null && _f !== void 0 ? _f : '';
             // Set values globally using RED.settings
-            //this.server = server
+            this.server = server;
             this.chore_id = +chore_id;
-            //  this.complete = complete == "true"
+            this.complete = complete;
             // Notify user about the settings
         }
     });
@@ -58,14 +58,14 @@
       <option value="PUT">PUT</option>
       <option value="PUT">POST</option>
     </select>
-  </div>
+  </div>-->
   <div class="form-row">
     <label for="node-input-complete"><i class="fa fa-tasks"></i>Complete</label>
     <select type="text" id="node-input-complete" style="width:70%">
       <option value="true"> Complete</option>
       <option value="false">Uncomplete</option> 
     </select>
-  </div>-->
+  </div>
 </script>
 <script type="text/html" data-help-name="complete-chore">
   <p>Complete a chore via this node.</p>

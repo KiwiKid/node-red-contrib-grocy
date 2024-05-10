@@ -8,7 +8,7 @@
         defaults: {
             name: { value: "" },
             server: { value: "", type: "grocy-config" },
-            complete: { value: true },
+            complete: { value: "true" },
             task_id: { value: "" }
         },
         inputs: 1,
@@ -16,7 +16,7 @@
         icon: "file.png",
         paletteLabel: "complete task",
         label: function () {
-            return "".concat(this.complete ? 'compelete' : 'undo', " grocy task #").concat(this.task_id);
+            return "".concat(this.complete ? 'do' : 'undo', " task #").concat(this.task_id);
         },
         oneditprepare: function () {
             var _a, _b;
@@ -33,7 +33,7 @@
             // Set values globally using RED.settings
             this.server = server;
             this.task_id = +task_id;
-            this.complete = complete == "true";
+            this.complete = complete;
             // Notify user about the settings
         }
     });
@@ -51,7 +51,7 @@
   </div>
   <div class="form-row">
     <label for="node-input-task-id"><i class="fa fa-tag"></i> Task ID</label>
-    <input id="node-input-task-id">
+    <input id="node-input-task-id" type="number" placeholder="2">
 </div>
   <!--<div class="form-row">
     <label for="node-input-method"><i class="fa fa-tasks"></i> Operation</label>

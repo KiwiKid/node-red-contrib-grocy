@@ -6,9 +6,9 @@
         category: "grocy",
         color: "#a6bbcf",
         defaults: {
-            name: { value: "" },
-            entity_type: { value: "" },
-            entity_id: { value: "" },
+            name: { value: "", type: "text" },
+            entity_type: { value: "", type: "text" },
+            entity_id: { value: "", type: "text" },
             server: { value: "", type: "grocy-config" },
         },
         inputs: 1,
@@ -22,7 +22,6 @@
             $('#node-input-server').val(this.server);
             $('#node-input-entity-type').val(this.entity_type);
             $('#node-input-entity-id').val(this.entity_id ? this.entity_id : '');
-            console.log('Edit prepare:', this.entity_type);
         },
         oneditsave: function () {
             var _a, _b, _c, _d, _e, _f;
@@ -64,7 +63,7 @@
   </div>-->
   <div class="form-row">
     <label for="node-input-entity-type"><i class="fa fa-tasks"></i>Entity Type</label>
-    <select type="text" id="node-input-entity-type" style="width:70%">
+    <select id="node-input-entity-type" style="width:70%">
       <optgroup label="Inventory Management">
         <option value="batteries">Batteries</option>
         <option value="battery_charge_cycles">Battery Charge Cycles</option>

@@ -8,7 +8,8 @@ export interface GetEntityNodeDef extends NodeDef, GetEntityOptions {
 
 export interface GetEntityNode extends Node {
     server: any
-    entity_type: EntityType
+    entity_type: string
+    entity_id?: string
 }
 
 //export interface GetEntityNoder extends {};
